@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>46 — Grid view switch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; padding:clamp(1.25rem,4vw,4rem); }
+  .head { display:flex; gap:2rem; align-items:baseline; }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+  .btn {
+    background:none; border:1px solid rgba(242,237,227,.3); color:var(--bone); cursor:pointer;
+    padding:.5rem 1rem; font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+  }
+  .btn:hover { border-color:var(--teal); }
+
+  .view { position:relative; width:min(88vw,620px); }
+  .card {
+    position:absolute; left:0; top:0; width:31%; aspect-ratio:4/3; border-radius:3px;
+    display:grid; place-items:center; font-family:"Anton",sans-serif; font-weight:400; font-size:1.4rem;
+    color:rgba(16,17,19,.88); will-change:transform,width,height;
+  }
+  .card--a { background:linear-gradient(135deg,var(--vermillion),#ff8a3d); }
+  .card--b { background:linear-gradient(135deg,var(--amber),#ffe39a); }
+  .card--c { background:linear-gradient(135deg,var(--teal),#7fe3d8); }
+  .card--d { background:linear-gradient(135deg,#8a6df1,#c4b4ff); }
+  .card--e { background:linear-gradient(135deg,var(--bone),#b9b2a4); }
+  .card--f { background:linear-gradient(135deg,#ff8ab5,#ffb3cf); }
+  .status { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+  .status b { color:var(--teal); font-weight:400; }
+</style>
+</head>
+<body>
+<section class="stage">
+  <div class="head">
+    <p class="kicker"><b>46</b>Grid view switch</p>
+    <button class="btn" data-switch="btn" type="button">toggle</button>
+  </div>
+
+  <div class="view" data-switch="view">
+    <div class="card card--a" data-switch="card">01</div>
+    <div class="card card--b" data-switch="card">02</div>
+    <div class="card card--c" data-switch="card">03</div>
+    <div class="card card--d" data-switch="card">04</div>
+    <div class="card card--e" data-switch="card">05</div>
+    <div class="card card--f" data-switch="card">06</div>
+  </div>
+
+  <p class="status"><b data-switch="mode">GRID</b> — cards rearrange their geography</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: one toggle reorganises six cards between a 3×2 grid and a
+  // stacked list; each card flies to its new coordinates with staggered ease.
+  // Reduced motion: the switch is instant but still works.
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const view = document.querySelector('[data-switch="view"]');
+  const cards = gsap.utils.toArray('[data-switch="card"]');
+  const btn = document.querySelector('[data-switch="btn"]');
+  const mode = document.querySelector('[data-switch="mode"]');
+  let isGrid = true;
+
+  const W = () => view.clientWidth;
+  const GAP = () => W() * 0.02;
+
+  const geom = (grid) => {
+    const gap = GAP();
+    return cards.map((_, i) => {
+      if (grid) {
+        const cw = W() * 0.31, ch = cw * 0.75, c = i % 3, r = Math.floor(i / 3);
+        return { x: c * (cw + gap), y: r * (ch + gap), width: cw, height: ch };
+      }
+      const lw = W() * 0.55, lh = W() * 0.11;
+      return { x: (W() - lw) / 2, y: i * (lh + gap), width: lw, height: lh };
+    });
+  };
+
+  const apply = (grid, tween) => {
+    const g = geom(grid);
+    const H = grid ? g[3].y + g[3].height : g[5].y + g[5].height;
+    gsap.set(view, { height: H });
+    mode.textContent = grid ? "GRID" : "LIST";
+    cards.forEach((card, i) => {
+      const v = g[i];
+      if (tween) {
+        gsap.to(card, {
+          x: v.x, y: v.y, width: v.width, height: v.height,
+          duration: reduced ? 0 : 0.75,
+          ease: reduced ? "none" : "power3.inOut",
+          delay: reduced ? 0 : i * 0.05,
+          overwrite: "auto"
+        });
+      } else {
+        gsap.set(card, v);
+      }
+    });
+  };
+
+  apply(true, false);
+  btn.addEventListener("click", () => { isGrid = !isGrid; apply(isGrid, true); });
+</script>
+</body>
+</html>

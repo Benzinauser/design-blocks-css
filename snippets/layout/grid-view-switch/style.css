@@ -1,0 +1,29 @@
+
+  :root { --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center;gap:var(--space-40);padding:clamp(var(--space-20),4vw,var(--space-64)); }
+  .head { display:flex;gap:var(--space-32); align-items:baseline; }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+  .btn {
+    background:none;border:1px solid var(--color-bone-alpha-30); color:var(--bone); cursor:pointer;
+padding:.5rem var(--space-16); font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+  }
+  .btn:hover { border-color:var(--teal); }
+
+  .view { position:relative;width:min(88vw,var(--space-620)); }
+  .card {
+    position:absolute; left:0; top:0; width:31%; aspect-ratio:4/3;border-radius:var(--radius-3px);
+    display:grid; place-items:center; font-family:"Anton",sans-serif; font-weight:400; font-size:1.4rem;
+color:var(--color-ink-alpha-88); will-change:transform,width,height;
+  }
+.card--a { background:linear-gradient(135deg,var(--vermillion),var(--color-orange)); }
+.card--b { background:linear-gradient(135deg,var(--amber),var(--color-amber-light)); }
+.card--c { background:linear-gradient(135deg,var(--teal),var(--color-teal-light)); }
+.card--d { background:linear-gradient(135deg,var(--color-violet),var(--color-violet-light)); }
+.card--e { background:linear-gradient(135deg,var(--bone),var(--color-sand)); }
+.card--f { background:linear-gradient(135deg,var(--color-pink),var(--color-pink-light)); }
+  .status { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+  .status b { color:var(--teal); font-weight:400; }

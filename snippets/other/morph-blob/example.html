@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>22 — Morph blob</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .morph { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3rem; padding:clamp(1.25rem,4vw,4rem); text-align:center; }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  svg { width:min(46vw,380px); height:auto; overflow:visible; }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<section class="morph">
+  <p class="kicker"><b>22</b>Morph blob</p>
+  <svg viewBox="0 0 200 200" aria-hidden="true">
+    <path id="blob" fill="#ff4a17" />
+  </svg>
+  <p class="hint">— a liquid signature, cycling through four poses</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://assets.codepen.io/16327/MorphSVGPlugin3.min.js"></script>
+<script>
+  // Design note: an SVG blob breathes through four poses (identical command
+  // structure, generated in code so the morph is always clean) while its
+  // fill shifts with each shape. Reduced motion: first pose only.
+  gsap.registerPlugin(MorphSVGPlugin);
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // all shapes share one command structure: 8 anchors, C-curves, Z
+  function blobPath(radii, cx = 100, cy = 100, r = 82) {
+    const n = radii.length;
+    let d = "";
+    for (let i = 0; i < n; i++) {
+      const a0 = (i / n) * Math.PI * 2;
+      const a1 = ((i + 1) / n) * Math.PI * 2;
+      const r0 = radii[i], r1 = radii[(i + 1) % n];
+      const x0 = cx + Math.cos(a0) * r0, y0 = cy + Math.sin(a0) * r0;
+      const x1 = cx + Math.cos(a1) * r1, y1 = cy + Math.sin(a1) * r1;
+      const c = r * 0.52;
+      const c1x = x0 + Math.cos(a0 + Math.PI / 2) * c * (r0 / r);
+      const c1y = y0 + Math.sin(a0 + Math.PI / 2) * c * (r0 / r);
+      const c2x = x1 - Math.cos(a1 + Math.PI / 2) * c * (r1 / r);
+      const c2y = y1 - Math.sin(a1 + Math.PI / 2) * c * (r1 / r);
+      d += (i === 0 ? `M ${x0.toFixed(1)} ${y0.toFixed(1)} ` : "") +
+        `C ${c1x.toFixed(1)} ${c1y.toFixed(1)} ${c2x.toFixed(1)} ${c2y.toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)} `;
+    }
+    return d + "Z";
+  }
+
+  const shapes = [
+    { d: blobPath([82, 82, 82, 82, 82, 82, 82, 82]), color: "#ff4a17" },           // round
+    { d: blobPath([116, 62, 112, 66, 116, 62, 112, 66]), color: "#ffc43d" },        // star-ish
+    { d: blobPath([62, 112, 62, 112, 62, 112, 62, 112]), color: "#2fd6c3" },        // cross-ish
+    { d: blobPath([96, 96, 58, 96, 96, 96, 58, 96]), color: "#f2ede3" }             // hourglass-ish
+  ];
+
+  const blob = document.querySelector("#blob");
+  blob.setAttribute("d", shapes[0].d);
+
+  if (!reduced) {
+    let i = 0;
+    const morph = () => {
+      const next = (i + 1) % shapes.length;
+      gsap.to(blob, {
+        morphSVG: { shape: shapes[next].d },
+        fill: shapes[next].color,
+        duration: 1.7,
+        ease: "sine.inOut",
+        onComplete: () => { i = next; morph(); }
+      });
+    };
+    morph();
+  }
+</script>
+</body>
+</html>

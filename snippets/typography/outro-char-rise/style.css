@@ -1,0 +1,19 @@
+
+  :root {
+    --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .outro {
+    min-height:100svh; display:flex; flex-direction:column; justify-content:center;gap:var(--space-48);
+padding:clamp(var(--space-48),10vh,var(--space-128)) clamp(var(--space-20),4vw,var(--space-64));
+  }
+  .line {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(2.2rem,7vw,var(--font-size-104px)); line-height:1.04;
+  }
+  /* SplitText wraps each char; inline-block lets transforms apply per char */
+  .line .char { display:inline-block; will-change:transform; }
+  .meta { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;gap:var(--space-16); border-top:1px solid rgba(242,237,227,.16); padding-top:1.4rem; color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+  .meta b { color:var(--vermillion); font-weight:400; }

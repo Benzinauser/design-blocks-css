@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>38 — Push grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.9rem; width:min(80vw,420px); }
+  .cell {
+    aspect-ratio:1/1; border-radius:3px; display:grid; place-items:center; cursor:pointer;
+    font-family:"Anton",sans-serif; font-weight:400; font-size:1.4rem; color:rgba(16,17,19,.88);
+    will-change:transform;
+  }
+  .cell--a { background:linear-gradient(135deg,var(--vermillion),#ff8a3d); }
+  .cell--b { background:linear-gradient(135deg,var(--amber),#ffe39a); }
+  .cell--c { background:linear-gradient(135deg,var(--teal),#7fe3d8); }
+  .cell--d { background:linear-gradient(135deg,#8a6df1,#c4b4ff); }
+  .cell--e { background:linear-gradient(135deg,var(--bone),#b9b2a4); }
+  .cell--f { background:linear-gradient(135deg,var(--ink-2),#2a2d31); color:var(--teal); }
+  .cell--g { background:linear-gradient(135deg,#ff8ab5,#ffb3cf); }
+  .cell--h { background:linear-gradient(135deg,#ff9e64,#ffc48a); }
+  .cell--i { background:linear-gradient(135deg,var(--amber),var(--vermillion)); }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce) { .cell:focus-visible, .cell:hover { outline:2px solid var(--teal); outline-offset:-2px; } }
+</style>
+</head>
+<body>
+<section class="stage">
+  <p class="kicker"><b>38</b>Push grid — hover a cell, its neighbours make room</p>
+  <div class="grid" data-push="grid">
+    <div class="cell cell--a" data-push="cell" tabindex="0">01</div>
+    <div class="cell cell--b" data-push="cell" tabindex="0">02</div>
+    <div class="cell cell--c" data-push="cell" tabindex="0">03</div>
+    <div class="cell cell--d" data-push="cell" tabindex="0">04</div>
+    <div class="cell cell--e" data-push="cell" tabindex="0">05</div>
+    <div class="cell cell--f" data-push="cell" tabindex="0">06</div>
+    <div class="cell cell--g" data-push="cell" tabindex="0">07</div>
+    <div class="cell cell--h" data-push="cell" tabindex="0">08</div>
+    <div class="cell cell--i" data-push="cell" tabindex="0">09</div>
+  </div>
+  <p class="hint">— hovered grows; row-mates step sideways, column-mates step away</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: hover a tile and it asserts itself (scale, shadow) while its
+  // row-mates yield sideways and its column-mates yield away — a polite
+  // make-way. Reduced motion: no push, just a visible outline.
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduced) { // reduced → CSS outline only
+  const cells = gsap.utils.toArray('[data-push="cell"]');
+  const cols = 3;
+  const PUSH = 22;
+
+  cells.forEach((cell, i) => {
+    const row = Math.floor(i / cols), col = i % cols;
+    const rowMates = cells.filter((_, j) => Math.floor(j / cols) === row && j !== i);
+    const colMates = cells.filter((_, j) => j % cols === col && j !== i);
+
+    const press = () => {
+      gsap.to(cell, { scale: 1.12, zIndex: 5, duration: 0.45, ease: "power3.out", overwrite: "auto" });
+      rowMates.forEach((m) => gsap.to(m, { x: (m.dataset.idx < i ? -1 : 1) * PUSH, duration: 0.5, ease: "power3.out", overwrite: "auto" }));
+      colMates.forEach((m) => gsap.to(m, { y: PUSH, duration: 0.5, ease: "power3.out", overwrite: "auto" }));
+    };
+    const release = () => {
+      gsap.to(cell, { scale: 1, zIndex: 0, duration: 0.7, ease: "elastic.out(1, 0.5)", overwrite: "auto" });
+      rowMates.forEach((m) => gsap.to(m, { x: 0, duration: 0.7, ease: "elastic.out(1, 0.55)", overwrite: "auto" }));
+      colMates.forEach((m) => gsap.to(m, { y: 0, duration: 0.7, ease: "elastic.out(1, 0.55)", overwrite: "auto" }));
+    };
+    cell.dataset.idx = i;
+    cell.addEventListener("mouseenter", press);
+    cell.addEventListener("mouseleave", release);
+    cell.addEventListener("focus", press);
+    cell.addEventListener("blur", release);
+  });
+  } // end reduced-motion guard
+</script>
+</body>
+</html>

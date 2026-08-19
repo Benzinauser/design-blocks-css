@@ -1,0 +1,35 @@
+
+  :root { --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center;gap:var(--space-40);padding:clamp(var(--space-20),4vw,var(--space-64)); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  .burger {
+    position:fixed; top:1.4rem; right:1.4rem; z-index:30;
+width:var(--space-52);height:var(--space-52);border-radius:var(--radius-round); border:none; cursor:pointer;
+    background:var(--bone); display:grid; place-items:center;
+  }
+  .burger span { display:block;width:var(--space-20); height:2px; background:var(--ink); margin:0 auto; transition:none; }
+  .burger span + span { margin-top:5px; }
+
+  .veil {
+    position:fixed; inset:0; z-index:20; pointer-events:none; opacity:0;
+background:radial-gradient(circle at 100% 0%, var(--ink-2), var(--color-ink));
+border-radius:var(--radius-round); will-change:transform,border-radius,opacity;
+  }
+  .menu {
+    position:fixed; inset:0; z-index:25; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:1.6rem; pointer-events:none;
+    opacity:0;
+  }
+  .menu a {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(var(--space-32),7vw,var(--font-size-)); color:var(--bone); text-decoration:none;
+    opacity:0; transform:translateY(18px); display:block;
+  }
+  .menu a:hover { color:var(--vermillion); }
+  .menu .idx { color:var(--teal); font-size:.7rem; letter-spacing:.14em; margin-right:1.2rem; font-family:"IBM Plex Mono",monospace; }

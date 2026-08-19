@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>26 — Fan spread</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .fan-wrap { min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .fan { position:relative; display:flex; align-items:flex-end; justify-content:center; gap:.5rem; padding-top:3rem; }
+  .card {
+    position:relative; width:clamp(120px,14vw,170px); aspect-ratio:3/4.4;
+    border-radius:3px; display:flex; flex-direction:column; justify-content:space-between;
+    padding:.8rem; color:rgba(16,17,19,.85); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase;
+    will-change:transform; cursor:pointer;
+  }
+  .card b { font-family:"Anton",sans-serif; font-weight:400; font-size:1.3rem; }
+  .card--a { background:linear-gradient(135deg,var(--vermillion),#ff8a3d); }
+  .card--b { background:linear-gradient(135deg,var(--amber),#ffe39a); }
+  .card--c { background:linear-gradient(135deg,var(--teal),#7fe3d8); }
+  .card--d { background:linear-gradient(135deg,#8a6df1,#c4b4ff); }
+  .card--e { background:linear-gradient(135deg,var(--bone),#b9b2a4); }
+
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+  @media (max-width:760px) { .fan { flex-wrap:wrap; } }
+</style>
+</head>
+<body>
+<section class="fan-wrap">
+  <p class="kicker"><b>26</b>Fan spread</p>
+
+  <div class="fan" data-fan="group">
+    <div class="card card--a" data-fan="card"><span>deal / 01</span><b>Vision</b></div>
+    <div class="card card--b" data-fan="card"><span>deal / 02</span><b>Draft</b></div>
+    <div class="card card--c" data-fan="card"><span>deal / 03</span><b>Beat</b></div>
+    <div class="card card--d" data-fan="card"><span>deal / 04</span><b>Cut</b></div>
+    <div class="card card--e" data-fan="card"><span>deal / 05</span><b>Ship</b></div>
+  </div>
+
+  <p class="hint">— a hand of cards; hover the pile to spread, hover a card to lift it</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: cards sit fanned like a held hand; hovering the pile spreads
+  // them flat, hovering one card lifts it forward with an elastic. Reduced
+  // motion: the pile stays a plain row.
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const group = document.querySelector('[data-fan="group"]');
+  const cards = gsap.utils.toArray('[data-fan="card"]');
+  const n = cards.length;
+  const ANGLE = 24;
+
+  const fan = () => {
+    cards.forEach((card, i) => {
+      const a = (i - (n - 1) / 2) * ANGLE;
+      gsap.to(card, {
+        rotate: a,
+        xPercent: a * 3.4,
+        transformOrigin: "50% 130%",
+        duration: 0.9,
+        ease: "power3.out",
+        overwrite: "auto"
+      });
+    });
+  };
+  const spread = () => {
+    cards.forEach((card) => {
+      gsap.to(card, {
+        rotate: 0, xPercent: 0,
+        transformOrigin: "50% 50%",
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.03,
+        overwrite: "auto"
+      });
+    });
+  };
+
+  if (!reduced) {
+    gsap.set(cards, { transformOrigin: "50% 130%" });
+    fan();
+    group.addEventListener("mouseenter", spread);
+    group.addEventListener("mouseleave", fan);
+    cards.forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        gsap.to(card, { y: -34, scale: 1.14, zIndex: 10, duration: 0.55, ease: "elastic.out(1, 0.5)", overwrite: "auto" });
+      });
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, { y: 0, scale: 1, zIndex: 0, duration: 0.5, ease: "power3.out", overwrite: "auto" });
+      });
+    });
+  }
+</script>
+</body>
+</html>

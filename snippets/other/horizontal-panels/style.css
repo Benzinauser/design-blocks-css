@@ -1,0 +1,20 @@
+
+  :root { --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  /* default: vertical stack (no-JS / reduced); JS switches to a row */
+  .hscroll { position:relative; overflow:hidden; }
+  .track { display:flex; flex-direction:column; }
+  .panel {
+    flex:0 0 auto; min-height:100svh; display:flex; flex-direction:column; justify-content:space-between;
+padding:clamp(var(--space-20),4vw,var(--space-64)); border-bottom:1px solid rgba(242,237,227,.16);
+  }
+  .panel .idx { color:var(--vermillion); font-size:.72rem; letter-spacing:.14em; }
+  .panel h2 { font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;font-size:clamp(2.4rem,8vw,var(--space-112)); line-height:1; }
+  .panel p { color:var(--bone-dim);max-width:var(--space-416); }
+  .counter {
+    position:absolute;top:var(--space-24);right:clamp(var(--space-20),4vw,var(--space-64)); z-index:5;
+    font-size:.8rem; color:var(--bone);
+  }
+  .counter b { color:var(--vermillion); font-weight:400; }

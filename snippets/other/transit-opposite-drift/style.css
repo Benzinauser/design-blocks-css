@@ -1,0 +1,35 @@
+
+  :root {
+    --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; overflow-x:clip; }
+
+  .transit {
+    display:flex; flex-direction:column; justify-content:center;gap:var(--space-40);
+    min-height:100svh;padding:clamp(var(--space-48),8vh,var(--space-96)) 0;
+  }
+.head { padding:0 clamp(var(--space-20),4vw,var(--space-64)); display:flex; align-items:baseline;gap:var(--space-24); }
+  .head h2 { font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; }
+  .head h2 b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+  .head p { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  .track { overflow:hidden; padding:.5rem 0; }
+  .track-inner { display:flex; gap:clamp(.8rem,1.6vw,1.4rem); width:max-content; will-change:transform; }
+  .plate {
+    flex:0 0 auto;width:clamp(230px,26vw,var(--space-320));height:clamp(150px,17vw,var(--space-200));
+    display:flex; align-items:flex-end; justify-content:space-between;padding:.9rem var(--space-16);
+border-radius:var(--radius-2px); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(16,17,19,.82);
+  }
+  .plate::after { content:attr(data-index); font-size:.62rem; opacity:.6; }
+.plate--a { background:linear-gradient(135deg,var(--vermillion),var(--color-orange)); }
+.plate--b { background:linear-gradient(135deg,var(--teal),var(--color-teal-light)); }
+.plate--c { background:linear-gradient(135deg,var(--amber),var(--color-amber-light)); }
+.plate--d { background:linear-gradient(135deg,var(--color-violet),var(--color-violet-light)); }
+.plate--e { background:linear-gradient(135deg,var(--bone),var(--color-sand)); }
+.plate--f { background:linear-gradient(315deg,var(--amber),var(--color-orange)); }
+.plate--g { background:linear-gradient(315deg,var(--color-blue),var(--color-blue-light)); }
+.plate--h { background:linear-gradient(315deg,var(--vermillion),var(--color-peach)); }
+.plate--i { background:linear-gradient(315deg,var(--teal),var(--color-mint)); }
+.plate--j { background:linear-gradient(315deg,var(--color-green),var(--color-green-light)); }

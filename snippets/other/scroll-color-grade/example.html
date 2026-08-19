@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>44 — Scroll color grade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .scene { position:relative; height:180svh; }
+  .grade {
+    position:sticky; top:0; height:100svh; overflow:hidden;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem;
+    padding:clamp(1.25rem,4vw,4rem); will-change:filter;
+  }
+  .grade::before {
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(120% 90% at 50% 12%, #2b4a63 0%, #101d2b 55%, #101113 100%);
+  }
+  .grade h1 {
+    position:relative; font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.4rem,8vw,7rem); text-align:center; line-height:1;
+  }
+  .grade h1 b { color:var(--vermillion); font-weight:400; }
+  .grade p { position:relative; color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div class="scene">
+  <section class="grade" data-grade="panel">
+    <h1>Grading the <b>scroll</b></h1>
+    <p>44 · the whole scene drifts from night to signal as you pass — color, not position, tells the progress</p>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  // Design note: the scene's grade shifts — hue and saturation follow the
+  // scroll, so the emotional temperature changes without anything moving.
+  // Reduced motion: the base (night) grade stays.
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.to('[data-grade="panel"]', {
+      filter: "hue-rotate(160deg) saturate(1.7) brightness(1.15)",
+      ease: "none",
+      scrollTrigger: { trigger: '[data-grade="panel"]', start: "top top", end: "bottom bottom", scrub: 0.6 }
+    });
+  }
+</script>
+</body>
+</html>

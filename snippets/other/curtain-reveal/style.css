@@ -1,0 +1,24 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage {
+    position:relative; height:100svh; overflow:hidden;
+    display:grid; place-items:center;padding:clamp(var(--space-20),4vw,var(--space-64));
+  }
+  .backdrop h1 {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(2.6rem,9vw,var(--space-144)); line-height:1; text-align:center;
+  }
+  .backdrop p { text-align:center; color:var(--bone-dim); margin-top:1.2rem; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  .curtain {
+    position:absolute; top:0; bottom:0; width:50%;
+    display:grid; place-items:center; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:rgba(16,17,19,.75); will-change:transform;
+  }
+  .curtain--l { left:0;background:linear-gradient(135deg,var(--vermillion),var(--color-orange)); }
+  .curtain--r { right:0;background:linear-gradient(135deg,var(--teal),var(--color-teal-light)); }
+
+  @media (prefers-reduced-motion: reduce) { .curtain { display:none; } }

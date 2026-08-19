@@ -1,0 +1,16 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+.rot { padding:clamp(var(--space-64),12vh,var(--space-128)) clamp(var(--space-20),4vw,var(--space-64)); }
+  .lead { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim);margin-bottom:calc(clamp(var(--space-64),12vh,var(--space-128)) * .4); }
+  .lead b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .word {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(var(--font-size-),11vw,var(--space-160)); line-height:1.12; will-change:transform;
+  }
+  .word:nth-child(even) { color:var(--vermillion); }
+  .word:nth-child(3n) { color:var(--teal); }
+  .tail { min-height:40svh; }

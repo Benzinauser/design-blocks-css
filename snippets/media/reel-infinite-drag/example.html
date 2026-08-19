@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 — Draggable infinite loop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"Space Grotesk",sans-serif; }
+  .mono { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  .reel { padding:clamp(3rem,8vh,6rem) clamp(1.25rem,4vw,4rem); }
+  .head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:1rem 2rem; margin-bottom:2.5rem; }
+  .head h2 { font-family:"IBM Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; }
+  .head h2 b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+  .controls { display:flex; align-items:center; gap:1.25rem; }
+  button {
+    display:inline-flex; align-items:center; gap:.6rem; padding:.55rem 1rem;
+    border:1px solid var(--bone-faint); background:none; color:var(--bone-dim); cursor:pointer;
+    font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+  }
+  button:hover { color:var(--bone); border-color:var(--bone-dim); }
+  button svg { width:1.1rem; }
+  .count { display:inline-flex; align-items:baseline; gap:.4rem; font-size:.8rem; font-family:"IBM Plex Mono",monospace; }
+  .count-current { display:inline-block; height:1em; overflow:hidden; color:var(--bone); font-size:1rem; line-height:1; vertical-align:-.05em; }
+  .count-num { display:block; height:1em; line-height:1; }
+  .count-total { color:var(--bone-dim); }
+
+  /* overflow hidden is applied by JS so a no-JS fallback wraps the cards */
+  .viewport { overflow:visible; cursor:grab; padding:.5rem 0 1.5rem; }
+  .viewport:active { cursor:grabbing; }
+  .list { display:flex; flex-wrap:wrap; gap:1.25rem; will-change:transform; }
+
+  .card {
+    position:relative; flex:0 0 auto; width:clamp(230px,24vw,300px); aspect-ratio:3/4;
+    display:flex; flex-direction:column; justify-content:space-between; padding:1rem;
+    background:var(--ink-2); border:1px solid var(--bone-faint); overflow:hidden; cursor:pointer;
+  }
+  .card.is-active { border-color:rgba(255,74,23,.62); }
+  .card .figure { flex:1; border-radius:2px; background:linear-gradient(135deg,var(--teal),#7fe3d8); }
+  .card:nth-child(3n+2) .figure { background:linear-gradient(135deg,var(--vermillion),#ff8a3d); }
+  .card:nth-child(3n)   .figure { background:linear-gradient(135deg,var(--amber),#ffe39a); }
+  .card h3 { font-family:"Anton",sans-serif; font-weight:400; font-size:1.8rem; text-transform:uppercase; line-height:1; margin-top:.9rem; }
+  .card p { color:var(--bone-dim); margin-top:.4rem; }
+  .card .idx { position:absolute; top:1rem; right:1rem; color:var(--bone-faint); font-size:.72rem; }
+
+  .rail { display:flex; align-items:center; gap:1.2rem; margin-top:.5rem; }
+  .rail .label { color:var(--bone-faint); }
+  .rail .track { flex:1; height:1px; background:var(--bone-faint); overflow:hidden; }
+  .rail .fill { display:block; height:100%; background:var(--vermillion); transform:scaleX(0); transform-origin:left; }
+</style>
+</head>
+<body>
+<section class="reel">
+  <div class="head">
+    <h2><b>02</b>Field notes</h2>
+    <div class="controls mono">
+      <button data-reel="prev" aria-label="Previous"><svg viewBox="0 0 24 12" fill="none"><path d="M20.5 6H3.5m0 0 4.6-4.5M3.5 6l4.6 4.5" stroke="currentColor" stroke-width="1.4"/></svg>Prev</button>
+      <span class="count">
+        <span class="count-current"><span data-reel="stack"></span></span>
+        <span>/</span><span class="count-total" data-reel="total">05</span>
+      </span>
+      <button data-reel="next" aria-label="Next">Next<svg viewBox="0 0 24 12" fill="none"><path d="M3.5 6h17m0 0-4.6-4.5M20.5 6l-4.6 4.5" stroke="currentColor" stroke-width="1.4"/></svg></button>
+    </div>
+  </div>
+
+  <div class="viewport" data-reel="viewport">
+    <div class="list" data-reel="list">
+      <article class="card" tabindex="0" role="button" aria-label="Study 01"><div class="figure"></div><div><h3>Direction</h3><p class="mono">Identity · 2024</p></div><span class="idx mono">01</span></article>
+      <article class="card" tabindex="0" role="button" aria-label="Study 02"><div class="figure"></div><div><h3>Choreography</h3><p class="mono">Editorial · 2024</p></div><span class="idx mono">02</span></article>
+      <article class="card" tabindex="0" role="button" aria-label="Study 03"><div class="figure"></div><div><h3>Interaction</h3><p class="mono">Systems · 2023</p></div><span class="idx mono">03</span></article>
+      <article class="card" tabindex="0" role="button" aria-label="Study 04"><div class="figure"></div><div><h3>Typography</h3><p class="mono">Identity · 2023</p></div><span class="idx mono">04</span></article>
+      <article class="card" tabindex="0" role="button" aria-label="Study 05"><div class="figure"></div><div><h3>Narrative</h3><p class="mono">Film · 2022</p></div><span class="idx mono">05</span></article>
+    </div>
+  </div>
+
+  <div class="rail mono" aria-hidden="true">
+    <span class="label">index</span>
+    <span class="track"><span class="fill" data-reel="rail"></span></span>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script>
+<script src="https://assets.codepen.io/16327/InertiaPlugin.min.js"></script>
+<script>
+  // Design note: an endless horizontal field — drag with inertia, snap to
+  // slides, arrows + click/keyboard to index. The counter rolls like a
+  // mechanical register and the rail tracks position. User-initiated, so it
+  // stays enabled under reduced motion.
+  gsap.registerPlugin(Draggable, InertiaPlugin);
+
+  const list = document.querySelector('[data-reel="list"]');
+  const viewport = document.querySelector('[data-reel="viewport"]');
+  if (list) list.style.flexWrap = "nowrap";
+  if (viewport) viewport.style.overflow = "hidden";
+
+  const pad = (n) => String(n).padStart(2, "0");
+  const slides = gsap.utils.toArray('[data-reel="list"] > .card');
+  const stack = document.querySelector('[data-reel="stack"]');
+  const nums = [];
+  slides.forEach((_, i) => {
+    const n = document.createElement("span");
+    n.className = "count-num";
+    n.textContent = pad(i + 1);
+    stack.appendChild(n);
+    nums.push(n);
+  });
+  document.querySelector('[data-reel="total"]').textContent = pad(slides.length);
+
+  const loop = horizontalLoop(slides, {
+    paused: true, draggable: true, center: false, trigger: viewport,
+    onChange: (el, index) => {
+      slides.forEach((s) => s.classList.remove("is-active"));
+      el.classList.add("is-active");
+      gsap.to(nums, { y: `-${100 * index}%`, ease: "power3.out", duration: 0.5 });
+      gsap.to('[data-reel="rail"]', { scaleX: (index + 1) / slides.length, ease: "power3.out", duration: 0.5 });
+    }
+  });
+
+  document.querySelector('[data-reel="next"]').addEventListener("click", () => loop.next({ ease: "power3.inOut", duration: 0.7 }));
+  document.querySelector('[data-reel="prev"]').addEventListener("click", () => loop.previous({ ease: "power3.inOut", duration: 0.7 }));
+  slides.forEach((slide, i) => {
+    slide.addEventListener("click", () => loop.toIndex(i, { ease: "power3.inOut", duration: 0.7 }));
+    slide.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); loop.toIndex(i, { ease: "power3.inOut", duration: 0.7 }); }
+    });
+  });
+
+  /* GSAP community helper — infinite horizontal loop with draggable + inertia */
+  function horizontalLoop(items, config) {
+    items = gsap.utils.toArray(items);
+    config = config || {};
+    let timeline;
+    gsap.context(() => {
+      let onChange = config.onChange, lastIndex = 0,
+        tl = gsap.timeline({
+          repeat: config.repeat,
+          onUpdate: onChange && function () {
+            let i = tl.closestIndex();
+            if (lastIndex !== i) { lastIndex = i; onChange(items[i], i); }
+          },
+          paused: config.paused, defaults: { ease: "none" },
+          onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
+        }),
+        length = items.length, startX = items[0].offsetLeft, times = [], widths = [],
+        spaceBefore = [], xPercents = [], curIndex = 0, indexIsDirty = false,
+        center = config.center,
+        pixelsPerSecond = (config.speed || 1) * 100,
+        snap = config.snap === false ? (v) => v : gsap.utils.snap(config.snap || 1),
+        timeOffset = 0,
+        container = center === true ? items[0].parentNode : gsap.utils.toArray(center)[0] || items[0].parentNode,
+        totalWidth,
+        getTotalWidth = () =>
+          items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX +
+          spaceBefore[0] + items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") +
+          (parseFloat(config.paddingRight) || 0),
+        populateWidths = () => {
+          let b1 = container.getBoundingClientRect(), b2;
+          items.forEach((el, i) => {
+            widths[i] = parseFloat(gsap.getProperty(el, "width", "px"));
+            xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px")) / widths[i] * 100 +
+              gsap.getProperty(el, "xPercent"));
+            b2 = el.getBoundingClientRect();
+            spaceBefore[i] = b2.left - (i ? b1.right : b1.left);
+            b1 = b2;
+          });
+          gsap.set(items, { xPercent: (i) => xPercents[i] });
+          totalWidth = getTotalWidth();
+        },
+        timeWrap,
+        populateOffsets = () => {
+          timeOffset = center ? tl.duration() * (container.offsetWidth / 2) / totalWidth : 0;
+          center && times.forEach((t, i) => {
+            times[i] = timeWrap(tl.labels["label" + i] + tl.duration() * widths[i] / 2 / totalWidth - timeOffset);
+          });
+        },
+        getClosest = (values, value, wrap) => {
+          let i = values.length, closest = 1e10, index = 0, d;
+          while (i--) {
+            d = Math.abs(values[i] - value);
+            if (d > wrap / 2) d = wrap - d;
+            if (d < closest) { closest = d; index = i; }
+          }
+          return index;
+        },
+        populateTimeline = () => {
+          let i, item, curX, distanceToStart, distanceToLoop;
+          tl.clear();
+          for (i = 0; i < length; i++) {
+            item = items[i];
+            curX = xPercents[i] / 100 * widths[i];
+            distanceToStart = item.offsetLeft + curX - startX + spaceBefore[0];
+            distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
+            tl.to(item, {
+              xPercent: snap((curX - distanceToLoop) / widths[i] * 100),
+              duration: distanceToLoop / pixelsPerSecond
+            }, 0)
+              .fromTo(item, {
+                xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100)
+              }, {
+                xPercent: xPercents[i],
+                duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
+                immediateRender: false
+              }, distanceToLoop / pixelsPerSecond)
+              .add("label" + i, distanceToStart / pixelsPerSecond);
+            times[i] = distanceToStart / pixelsPerSecond;
+          }
+          timeWrap = gsap.utils.wrap(0, tl.duration());
+        },
+        refresh = (deep) => {
+          let progress = tl.progress();
+          tl.progress(0, true);
+          populateWidths();
+          deep && populateTimeline();
+          populateOffsets();
+          deep && tl.draggable ? tl.time(times[curIndex], true) : tl.progress(progress, true);
+        },
+        onResize = () => refresh(true),
+        proxy;
+      gsap.set(items, { x: 0 });
+      populateWidths();
+      populateTimeline();
+      populateOffsets();
+      window.addEventListener("resize", onResize);
+      function toIndex(index, vars) {
+        vars = vars || {};
+        (Math.abs(index - curIndex) > length / 2) && (index += index > curIndex ? -length : length);
+        let newIndex = gsap.utils.wrap(0, length, index), time = times[newIndex];
+        if (time > tl.time() !== index > curIndex && index !== curIndex) {
+          time += tl.duration() * (index > curIndex ? 1 : -1);
+        }
+        if (time < 0 || time > tl.duration()) vars.modifiers = { time: timeWrap };
+        curIndex = newIndex;
+        vars.overwrite = true;
+        gsap.killTweensOf(proxy);
+        return vars.duration === 0 ? tl.time(timeWrap(time)) : tl.tweenTo(time, vars);
+      }
+      tl.toIndex = (index, vars) => toIndex(index, vars);
+      tl.closestIndex = (setCurrent) => {
+        let index = getClosest(times, tl.time(), tl.duration());
+        if (setCurrent) { curIndex = index; indexIsDirty = false; }
+        return index;
+      };
+      tl.current = () => indexIsDirty ? tl.closestIndex(true) : curIndex;
+      tl.next = (vars) => toIndex(tl.current() + 1, vars);
+      tl.previous = (vars) => toIndex(tl.current() - 1, vars);
+      tl.times = times;
+      tl.progress(1, true).progress(0, true);
+      if (config.reversed) { tl.vars.onReverseComplete(); tl.reverse(); }
+      if (config.draggable && typeof (Draggable) === "function") {
+        proxy = document.createElement("div");
+        let wrap = gsap.utils.wrap(0, 1), ratio, startProgress, draggable, dragSnap, lastSnap, initChangeX, wasPlaying,
+          align = () => tl.progress(wrap(startProgress + (draggable.startX - draggable.x) * ratio)),
+          syncIndex = () => tl.closestIndex(true);
+        draggable = Draggable.create(proxy, {
+          trigger: config.trigger || items[0].parentNode,
+          type: "x",
+          onPressInit() {
+            let x = this.x;
+            gsap.killTweensOf(tl);
+            wasPlaying = !tl.paused();
+            tl.pause();
+            startProgress = tl.progress();
+            refresh();
+            ratio = 1 / totalWidth;
+            initChangeX = (startProgress / -ratio) - x;
+            gsap.set(proxy, { x: startProgress / -ratio });
+          },
+          onDrag: align,
+          onThrowUpdate: align,
+          overshootTolerance: 0,
+          inertia: true,
+          snap(value) {
+            if (Math.abs(startProgress / -ratio - this.x) < 10) return lastSnap + initChangeX;
+            let time = -(value * ratio) * tl.duration(),
+              wrappedTime = timeWrap(time),
+              snapTime = times[getClosest(times, wrappedTime, tl.duration())],
+              dif = snapTime - wrappedTime;
+            Math.abs(dif) > tl.duration() / 2 && (dif += dif < 0 ? tl.duration() : -tl.duration());
+            lastSnap = (time + dif) / tl.duration() / -ratio;
+            return lastSnap;
+          },
+          onRelease() {
+            syncIndex();
+            draggable.isThrowing && (indexIsDirty = true);
+          },
+          onThrowComplete: () => {
+            syncIndex();
+            wasPlaying && tl.play();
+          }
+        })[0];
+        tl.draggable = draggable;
+      }
+      tl.closestIndex(true);
+      lastIndex = curIndex;
+      onChange && onChange(items[curIndex], curIndex);
+      timeline = tl;
+    });
+    return timeline;
+  }
+</script>
+</body>
+</html>

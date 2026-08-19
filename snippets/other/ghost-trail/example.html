@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>42 — Ghost trail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(1.25rem,4vw,4rem); padding-bottom:3rem; }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+  .hint b { color:var(--amber); font-weight:400; margin-right:.8rem; }
+
+  .ghost {
+    position:fixed; width:14px; height:14px; border-radius:3px; pointer-events:none; z-index:10;
+  }
+  @media (prefers-reduced-motion: reduce) { .ghost { display:none; } }
+</style>
+</head>
+<body>
+<section class="stage">
+  <p class="hint"><b>42</b>Ghost trail — the cursor leaves echoes of previous states</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: each cursor step drops a square "past state" that fades and
+  // drifts away — discrete echoes, unlike the spring lag of a trail blob.
+  // Reduced motion: no ghosts.
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const stage = document.querySelector(".stage");
+    const COLORS = ["#ff4a17", "#ffc43d", "#2fd6c3", "#8a6df1"];
+    let last = 0, i = 0;
+
+    stage.addEventListener("mousemove", (e) => {
+      const now = performance.now();
+      if (now - last < 90) return;
+      last = now;
+
+      const ghost = document.createElement("div");
+      ghost.className = "ghost";
+      ghost.style.background = COLORS[i++ % COLORS.length];
+      ghost.style.left = e.clientX - 7 + "px";
+      ghost.style.top = e.clientY - 7 + "px";
+      document.body.appendChild(ghost);
+
+      gsap.to(ghost, {
+        x: gsap.utils.random(-22, 22),
+        y: gsap.utils.random(-14, 26),
+        rotation: gsap.utils.random(-40, 40),
+        opacity: 0,
+        scale: 0.65,
+        duration: 0.85,
+        ease: "power2.out",
+        onComplete: () => ghost.remove()
+      });
+    });
+  }
+</script>
+</body>
+</html>

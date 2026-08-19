@@ -1,0 +1,25 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center;gap:var(--space-40);padding:clamp(var(--space-20),4vw,var(--space-64)); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .net { position:relative;width:min(84vw,var(--space-560)); aspect-ratio:4/3; }
+  .net svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; z-index:1; }
+  .link { stroke:rgba(47,214,195,.55); stroke-width:1.5; stroke-dasharray:6 6; }
+  .nodes { position:absolute; inset:0; z-index:2; }
+  .node {
+    position:absolute; width:15%; aspect-ratio:1;border-radius:var(--radius-round);
+    display:grid; place-items:center; font-size:.55rem; letter-spacing:.1em; text-transform:uppercase;
+color:var(--color-ink-alpha-85); cursor:pointer; will-change:transform;
+  }
+  .node--a { left:5%;  top:6%;background:linear-gradient(135deg,var(--vermillion),var(--color-orange)); }
+  .node--b { left:42%; top:2%;background:linear-gradient(135deg,var(--amber),var(--color-amber-light)); }
+  .node--c { left:80%; top:12%;background:linear-gradient(135deg,var(--teal),var(--color-teal-light)); }
+  .node--d { left:12%; top:52%;background:linear-gradient(135deg,var(--color-violet),var(--color-violet-light)); }
+  .node--e { left:48%; top:64%;background:linear-gradient(135deg,var(--bone),var(--color-sand)); }
+  .node--f { left:78%; top:58%;background:linear-gradient(135deg,var(--color-pink),var(--color-pink-light)); }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }

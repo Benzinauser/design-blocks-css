@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>49 — Text repetition drift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .depth { min-height:150svh; position:relative; }
+  .stack { position:sticky; top:0; height:100svh; overflow:hidden; display:flex; flex-direction:column; justify-content:center; }
+  .word {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(3.5rem,12vw,11rem); line-height:1.15; text-align:center;
+    will-change:transform;
+  }
+  .word:nth-child(odd) { color:rgba(242,237,227,.16); }
+  .word:nth-child(even) { color:rgba(255,74,23,.5); }
+  .word:first-child, .word:last-child { color:var(--bone); }
+  .cap { position:absolute; bottom:2rem; left:0; right:0; text-align:center; color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<section class="depth" data-depth="zone">
+  <div class="stack" data-depth="stack">
+    <p class="word" data-depth="line">Motion</p>
+    <p class="word" data-depth="line">Motion</p>
+    <p class="word" data-depth="line">Motion</p>
+    <p class="word" data-depth="line">Motion</p>
+    <p class="word" data-depth="line">Motion</p>
+    <p class="word" data-depth="line">Motion</p>
+    <p class="cap">49 — one word, many depths; each layer scrolls at its own speed</p>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  // Design note: six stacked repetitions of one word become a depth field —
+  // outer layers travel faster than the middle, so the word fans apart in
+  // z-space while you read. Reduced motion: one clean word, no travel.
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const stack = document.querySelector('[data-depth="stack"]');
+    gsap.utils.toArray('[data-depth="line"]').forEach((line, i) => {
+      const depth = (i - 2.5) / 2.5;         // -1 … 1
+      const travel = 130 + depth * 170;      // outer layers move further
+      gsap.fromTo(line, { yPercent: -travel * 0.5 }, {
+        yPercent: travel * 0.5,
+        ease: "none",
+        scrollTrigger: { trigger: '[data-depth="zone"]', start: "top top", end: "bottom bottom", scrub: 1 }
+      });
+    });
+    stack; // avoid unused warnings
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 — Velocity skew</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .blocks { padding:clamp(2rem,6vh,5rem) 0; }
+  .block {
+    padding:clamp(2.5rem,8vh,6rem) clamp(1.25rem,4vw,4rem);
+    border-top:1px solid rgba(242,237,227,.16); will-change:transform;
+  }
+  .block:last-child { border-bottom:1px solid rgba(242,237,227,.16); }
+  .block .num { color:var(--vermillion); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+  .block h2 {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.6rem,9vw,8.5rem); line-height:1; margin-top:.6rem;
+  }
+  .block p { color:var(--bone-dim); max-width:30rem; margin-top:1rem; }
+  .hint { position:fixed; bottom:1.5rem; left:clamp(1.25rem,4vw,4rem); color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div class="blocks" data-velocity="blocks">
+  <div class="block"><span class="num">20 · velocity skew — scroll fast, watch the body lean</span><h2>Speed is a shape</h2><p>Scroll quickly and the text leans into the motion; slow down and it straightens. The skew follows your scroll velocity, never your position.</p></div>
+  <div class="block"><span class="num">/02</span><h2>It leans</h2><p>The faster you go, the more it gives — clamped so it never breaks the frame.</p></div>
+  <div class="block"><span class="num">/03</span><h2>Then recovers</h2><p>Release the wheel and the block settles back to true, smoothing with power2.</p></div>
+  <div class="block"><span class="num">/04</span><h2>That's the whole trick</h2><p>One quickTo, one clamped velocity reading.</p></div>
+</div>
+<p class="hint">scroll</p>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  // Design note: every block leans by skewX proportional to scroll velocity
+  // (clamped), smoothed with quickTo — the page itself feels kinetic.
+  // Reduced motion: no skew.
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const blocks = gsap.utils.toArray('[data-velocity="blocks"] .block');
+    const skewTo = blocks.map((block) => gsap.quickTo(block, "skewX", { duration: 0.4, ease: "power2.out" }));
+
+    ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      onUpdate: (self) => {
+        const v = gsap.utils.clamp(-11, 11, self.getVelocity() * 0.045);
+        skewTo.forEach((fn) => fn(v));
+      }
+    });
+  }
+</script>
+</body>
+</html>

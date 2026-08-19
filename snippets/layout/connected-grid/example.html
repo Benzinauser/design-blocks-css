@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>43 — Connected grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .net { position:relative; width:min(84vw,560px); aspect-ratio:4/3; }
+  .net svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; z-index:1; }
+  .link { stroke:rgba(47,214,195,.55); stroke-width:1.5; stroke-dasharray:6 6; }
+  .nodes { position:absolute; inset:0; z-index:2; }
+  .node {
+    position:absolute; width:15%; aspect-ratio:1; border-radius:50%;
+    display:grid; place-items:center; font-size:.55rem; letter-spacing:.1em; text-transform:uppercase;
+    color:rgba(16,17,19,.85); cursor:pointer; will-change:transform;
+  }
+  .node--a { left:5%;  top:6%;  background:linear-gradient(135deg,var(--vermillion),#ff8a3d); }
+  .node--b { left:42%; top:2%;  background:linear-gradient(135deg,var(--amber),#ffe39a); }
+  .node--c { left:80%; top:12%; background:linear-gradient(135deg,var(--teal),#7fe3d8); }
+  .node--d { left:12%; top:52%; background:linear-gradient(135deg,#8a6df1,#c4b4ff); }
+  .node--e { left:48%; top:64%; background:linear-gradient(135deg,var(--bone),#b9b2a4); }
+  .node--f { left:78%; top:58%; background:linear-gradient(135deg,#ff8ab5,#ffb3cf); }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<section class="stage">
+  <p class="kicker"><b>43</b>Connected grid — a node is never alone</p>
+  <div class="net" data-net="net">
+    <svg viewBox="0 0 560 420" aria-hidden="true"><g data-net="links"></g></svg>
+    <div class="nodes">
+      <div class="node node--a" data-net="node">motion</div>
+      <div class="node node--b" data-net="node">timing</div>
+      <div class="node node--c" data-net="node">easing</div>
+      <div class="node node--d" data-net="node">staging</div>
+      <div class="node node--e" data-net="node">spacing</div>
+      <div class="node node--f" data-net="node">rhythm</div>
+    </div>
+  </div>
+  <p class="hint">— hover a node; its connections march like signals</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: hovering a node highlights its links while dashed strokes
+  // march along them; the node itself lifts in 3D. Reduced motion: nodes
+  // stay put and links stay faint.
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const net = document.querySelector('[data-net="net"]');
+  const nodes = gsap.utils.toArray('[data-net="node"]');
+  const linkG = document.querySelector('[data-net="links"]');
+  const P = nodes.map((n) => {
+    const r = n.getBoundingClientRect(), b = net.getBoundingClientRect();
+    return { x: r.left - b.left + r.width / 2, y: r.top - b.top + r.height / 2 };
+  });
+  const links = [];
+  nodes.forEach((n, i) => {
+    nodes.forEach((m, j) => {
+      if (j <= i) return;
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("class", "link");
+      line.setAttribute("x1", P[i].x); line.setAttribute("y1", P[i].y);
+      line.setAttribute("x2", P[j].x); line.setAttribute("y2", P[j].y);
+      const L = Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y);
+      line.setAttribute("stroke-dasharray", "6 6");
+      line.style.opacity = 0.18;
+      linkG.appendChild(line);
+      links.push({ line, L, a: i, b: j });
+    });
+  });
+
+  if (!reduced) {
+    nodes.forEach((node, i) => {
+      node.addEventListener("mouseenter", () => {
+        gsap.to(node, { scale: 1.25, duration: 0.4, ease: "power3.out", overwrite: "auto" });
+        links.forEach(({ line, a, b }) => {
+          if (a !== i && b !== i) return;
+          gsap.to(line, { opacity: 0.9, strokeDashoffset: -L, duration: 0.9, ease: "none", repeat: -1, overwrite: "auto" });
+        });
+        P[i]; // noop keep refs
+      });
+      node.addEventListener("mouseleave", () => {
+        gsap.to(node, { scale: 1, duration: 0.6, ease: "elastic.out(1, 0.55)", overwrite: "auto" });
+        links.forEach(({ line, a, b }) => {
+          if (a !== i && b !== i) return;
+          gsap.to(line, { opacity: 0.18, duration: 0.5, overwrite: "auto" });
+          gsap.killTweensOf(line, "strokeDashoffset");
+          line.setAttribute("stroke-dashoffset", "0");
+        });
+      });
+    });
+  } else {
+    nodes.forEach((n) => n.addEventListener("mouseenter", () => gsap.to(n, { scale: 1.15, duration: 0.2 })));
+    nodes.forEach((n) => n.addEventListener("mouseleave", () => gsap.to(n, { scale: 1, duration: 0.2 })));
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .journey { min-height:100svh; display:flex; flex-direction:column; justify-content:center;gap:var(--space-48);padding:clamp(var(--space-20),4vw,var(--space-64)); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+.map { width:min(90vw,var(--space-760)); margin:0 auto; }
+  .map svg { width:100%; height:auto; overflow:visible; }
+  .route { fill:none;stroke:var(--color-bone-alpha-18); stroke-width:2; }
+  .route-draw { fill:none; stroke:var(--teal); stroke-width:3; stroke-linecap:round; stroke-dasharray:8 10; }
+  .marker { fill:var(--amber); }
+.waypoint { fill:var(--color-bone-alpha-40); }
+  .tags { display:flex; gap:1.6rem; flex-wrap:wrap; justify-content:center; }
+  .tags span { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .tags b { color:var(--teal); font-weight:400; }

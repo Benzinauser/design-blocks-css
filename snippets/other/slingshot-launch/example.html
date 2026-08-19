@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>31 — Slingshot launch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .rig {
+    position:relative; width:min(88vw,700px); height:clamp(200px,36vh,320px);
+    border:1px solid rgba(242,237,227,.2); border-radius:3px; overflow:hidden; touch-action:none;
+  }
+  .rail { position:absolute; left:16%; top:10%; bottom:10%; width:2px; background:rgba(242,237,227,.18); }
+  .puck {
+    position:absolute; left:16%; top:38%; width:26px; height:52px; margin-left:-13px;
+    border-radius:4px; background:linear-gradient(135deg,var(--amber),#e8a91d); cursor:grab;
+    display:grid; place-items:center; color:rgba(16,17,19,.8); font-size:.55rem; letter-spacing:.1em; text-transform:uppercase;
+  }
+  .band {
+    position:absolute; left:0; top:0; width:100%; height:100%; pointer-events:none;
+  }
+  .band line { stroke:rgba(242,237,227,.55); stroke-width:2; }
+  .shot {
+    position:absolute; left:52%; top:50%; width:26px; height:26px; margin:-13px 0 0 -13px;
+    border-radius:50%; background:radial-gradient(circle at 35% 35%, var(--teal), #1d9c8d); will-change:transform;
+  }
+  .target {
+    position:absolute; right:13%; top:50%; width:80px; height:80px; margin-top:-40px;
+    border:2px solid rgba(242,237,227,.35); border-radius:50%; display:grid; place-items:center;
+    color:var(--bone-dim); font-size:.6rem; letter-spacing:.16em; text-transform:uppercase;
+  }
+  .tension { position:absolute; left:26%; top:6%; color:var(--bone-dim); font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<section class="stage">
+  <p class="kicker"><b>31</b>Slingshot launch</p>
+
+  <div class="rig" data-sling="rig">
+    <div class="rail"></div>
+    <div class="puck" data-sling="puck">pull</div>
+    <span class="tension" data-sling="tension">0%</span>
+    <svg class="band" viewBox="0 0 700 320" preserveAspectRatio="none" aria-hidden="true">
+      <line data-sling="band-a" x1="54" y1="60" x2="360" y2="150"></line>
+      <line data-sling="band-b" x1="54" y1="260" x2="360" y2="150"></line>
+    </svg>
+    <div class="shot" data-sling="shot"></div>
+    <div class="target">target</div>
+  </div>
+
+  <p class="hint">— drag the puck down, release to fire</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script>
+<script>
+  // Design note: stored force — pulling the puck down draws the bands and
+  // pulls the shot back; releasing converts the stretch into a launch with
+  // the same force curve. Reduced motion: puck and shot stay at rest.
+  gsap.registerPlugin(Draggable);
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduced) {
+  const rig = document.querySelector('[data-sling="rig"]');
+  const puck = document.querySelector('[data-sling="puck"]');
+  const shot = document.querySelector('[data-sling="shot"]');
+  const bandA = document.querySelector('[data-sling="band-a"]');
+  const bandB = document.querySelector('[data-sling="band-b"]');
+  const tension = document.querySelector('[data-sling="tension"]');
+  const R = rig.getBoundingClientRect();
+  const maxPull = R.height * 0.34;
+  const anchor = { bx: R.width * 0.08, by1: R.height * 0.19, by2: R.height * 0.81 };
+  let launched = false, tween = null;
+
+  const draw = (pull) => {
+    const pry = pull * 0.85; // puck travels slightly less than shot pull back
+    const sx = R.width * 0.52, sy = R.height * 0.5 + pull * 0.62;
+    shot.style.transform = `translate(${sx - 13}px, ${sy - 13}px)`;
+    bandA.setAttribute("y2", sy); bandA.setAttribute("x2", sx);
+    bandB.setAttribute("y2", sy); bandB.setAttribute("x2", sx);
+    tension.textContent = Math.round(pull / maxPull * 100) + "%";
+  };
+
+  Draggable.create(puck, {
+    type: "y",
+    bounds: { minY: 0, maxY: maxPull },
+    cursor: "grabbing",
+    onDrag: function () {
+      if (launched) return;
+      draw(this.y);
+      gsap.to(shot, { x: -this.y * 0.62 * 3, duration: 0.2, ease: "power2.out", overwrite: "auto" });
+    },
+    onRelease: function () {
+      if (launched) return;
+      launched = true;
+      const f = this.y / maxPull;
+      if (f < 0.08) { launched = false; gsap.to(puck, { y: 0, duration: 0.5, ease: "power3.out" }); return; }
+
+      const dist = R.width * (0.42 + f * 0.42);
+      gsap.to(puck, { y: 0, duration: 0.6, ease: "elastic.out(1, 0.6)" });
+      gsap.to(shot, {
+        x: dist, y: 0, duration: 0.85, ease: "power2.out", overwrite: "auto",
+        onUpdate: () => draw(0),
+        onComplete: () => {
+          gsap.fromTo(shot, { scale: 1 }, { scale: 1.35, duration: 0.16, ease: "power2.out", yoyo: true, repeat: 1 });
+          gsap.fromTo(".target", { borderColor: "rgba(47,214,195,.9)", scale: 1.15 }, { borderColor: "rgba(242,237,227,.35)", scale: 1, duration: 0.7, ease: "power3.out" });
+          setTimeout(() => { launched = false; gsap.to(shot, { x: 0, y: 0, duration: 0.5, ease: "power3.inOut" }); }, 900);
+        }
+      });
+    }
+  });
+  } // end reduced-motion guard
+</script>
+</body>
+</html>

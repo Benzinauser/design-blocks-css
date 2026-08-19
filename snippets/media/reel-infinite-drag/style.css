@@ -1,0 +1,48 @@
+
+  :root {
+    --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"Space Grotesk",sans-serif; }
+  .mono { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+.reel { padding:clamp(var(--space-48),8vh,var(--space-96)) clamp(var(--space-20),4vw,var(--space-64)); }
+  .head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between;gap:var(--space-16) var(--space-32);margin-bottom:var(--space-40); }
+  .head h2 { font-family:"IBM Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; }
+  .head h2 b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+  .controls { display:flex; align-items:center;gap:var(--space-20); }
+  button {
+    display:inline-flex; align-items:center; gap:.6rem;padding:.55rem var(--space-16);
+    border:1px solid var(--bone-faint); background:none; color:var(--bone-dim); cursor:pointer;
+    font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+  }
+  button:hover { color:var(--bone); border-color:var(--bone-dim); }
+  button svg { width:1.1rem; }
+  .count { display:inline-flex; align-items:baseline; gap:.4rem; font-size:.8rem; font-family:"IBM Plex Mono",monospace; }
+  .count-current { display:inline-block; height:1em; overflow:hidden; color:var(--bone);font-size:var(--space-16); line-height:1; vertical-align:-.05em; }
+  .count-num { display:block; height:1em; line-height:1; }
+  .count-total { color:var(--bone-dim); }
+
+  /* overflow hidden is applied by JS so a no-JS fallback wraps the cards */
+  .viewport { overflow:visible; cursor:grab;padding:. 0 var(--space-24); }
+  .viewport:active { cursor:grabbing; }
+  .list { display:flex; flex-wrap:wrap;gap:var(--space-20); will-change:transform; }
+
+  .card {
+    position:relative; flex:0 0 auto;width:clamp(230px,24vw,var(--space-300)); aspect-ratio:3/4;
+    display:flex; flex-direction:column; justify-content:space-between;padding:var(--space-16);
+    background:var(--ink-2); border:1px solid var(--bone-faint); overflow:hidden; cursor:pointer;
+  }
+  .card.is-active { border-color:rgba(255,74,23,.62); }
+  .card .figure { flex:1;border-radius:var(--radius-2px);background:linear-gradient(135deg,var(--teal),var(--color-teal-light)); }
+.card:nth-child(3n+2) .figure { background:linear-gradient(135deg,var(--vermillion),var(--color-orange)); }
+.card:nth-child(3n)   .figure { background:linear-gradient(135deg,var(--amber),var(--color-amber-light)); }
+  .card h3 { font-family:"Anton",sans-serif; font-weight:400; font-size:1.8rem; text-transform:uppercase; line-height:1; margin-top:.9rem; }
+  .card p { color:var(--bone-dim); margin-top:.4rem; }
+  .card .idx { position:absolute;top:var(--space-16);right:var(--space-16); color:var(--bone-faint); font-size:.72rem; }
+
+  .rail { display:flex; align-items:center; gap:1.2rem; margin-top:.5rem; }
+  .rail .label { color:var(--bone-faint); }
+  .rail .track { flex:1; height:1px; background:var(--bone-faint); overflow:hidden; }
+  .rail .fill { display:block; height:100%; background:var(--vermillion); transform:scaleX(0); transform-origin:left; }

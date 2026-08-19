@@ -1,0 +1,22 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; overflow:hidden; }
+
+  .scene {
+    height:100svh; display:grid; place-items:center; cursor:crosshair;
+perspective:var(--space-900);
+  }
+  .scene-inner { position:relative;width:min(90vw,var(--space-900)); aspect-ratio:16/9; transform-style:preserve-3d; will-change:transform; }
+  .layer { position:absolute; will-change:transform; }
+
+  .layer--text { inset:0; display:grid; place-items:center; }
+  .layer--text h1 { font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;font-size:clamp(2.4rem,8vw,var(--space-128)); line-height:1; text-align:center; }
+  .layer--text h1 b { color:var(--vermillion); font-weight:400; }
+
+.orb { border-radius:var(--radius-round); filter:blur(2px); }
+  .orb--a { width:26%; aspect-ratio:1; background:radial-gradient(circle at 35% 35%, var(--vermillion), rgba(255,74,23,0) 70%); top:6%; left:4%; }
+  .orb--b { width:20%; aspect-ratio:1; background:radial-gradient(circle at 60% 40%, var(--teal), rgba(47,214,195,0) 70%); bottom:8%; right:6%; }
+  .ring { width:34%; aspect-ratio:1;border:2px solid var(--color-bone-alpha-40);border-radius:var(--radius-round); top:-14%; right:10%; }
+  .dot { width:2.2%; aspect-ratio:1;border-radius:var(--radius-round); background:var(--amber); bottom:16%; left:18%; }
+  .tag { position:absolute;bottom:var(--space-24);left:clamp(var(--space-20),4vw,var(--space-64)); color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }

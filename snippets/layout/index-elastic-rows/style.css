@@ -1,0 +1,29 @@
+
+  :root {
+    --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"Space Grotesk",sans-serif; }
+  .mono { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+.index { padding:clamp(var(--space-48),10vh,var(--space-128)) clamp(var(--space-20),4vw,var(--space-64)); }
+.head { margin-bottom:var(--space-40); font-family:"IBM Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; }
+  .head b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .list { border-top:1px solid var(--bone-faint); }
+  .item { border-bottom:1px solid var(--bone-faint); }
+
+  .row {
+    width:100%; display:grid; grid-template-columns:3.2rem 1fr auto; align-items:center;gap:var(--space-16);
+    padding:clamp(1.1rem,2.5vh,1.7rem) 0; background:none; border:0; color:inherit;
+    font:inherit; text-align:left; cursor:pointer;
+  }
+  .row .num { color:var(--vermillion); }
+  .row .name { font-family:"Anton",sans-serif; font-weight:400; font-size:clamp(1.8rem,4.5vw,3.4rem); text-transform:uppercase; line-height:1; }
+  .row .plus { justify-self:end; font-size:1.4rem; color:var(--bone-dim); transition:transform .5s cubic-bezier(.65,0,.35,1); }
+  .item[data-open="true"] .plus { transform:rotate(45deg); color:var(--vermillion); }
+
+  .body { height:0; overflow:hidden; }
+.body-inner { max-width:var(--space-736);padding:0 0 clamp(1.4rem,3vh,2.2rem) calc(3.2rem + var(--space-16)); color:var(--bone-dim); }
+  .body-inner p + p { margin-top:.7rem; color:var(--bone-faint); }

@@ -1,0 +1,25 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  /* progress indicator — fixed to the right edge */
+  .progress {
+    position:fixed; top:0;right:clamp(var(--space-20),3vw,var(--space-48)); bottom:0; z-index:10;
+    display:flex; flex-direction:column; align-items:center; justify-content:space-between;
+    padding:1.2rem 0; pointer-events:none;
+  }
+  .progress .track { flex:1; width:1px; background:rgba(242,237,227,.16); position:relative;margin:var(--space-16) 0; }
+  .progress .fill {
+    position:absolute; inset:0; background:var(--vermillion);
+    transform:scaleY(0); transform-origin:top; will-change:transform;
+  }
+  .progress .pct { font-size:.68rem; letter-spacing:.14em; color:var(--bone-dim); }
+
+  @media (prefers-reduced-motion: reduce) { .progress { display:none; } }
+
+.sections { padding-right:var(--space-64); }
+  .sec { min-height:100svh; display:flex; flex-direction:column; justify-content:center;padding:clamp(var(--space-20),4vw,var(--space-64)); }
+  .sec h2 { font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;font-size:clamp(2.4rem,8vw,var(--space-112)); line-height:1; }
+  .sec h2 b { color:var(--vermillion); font-weight:400; }
+  .sec p { color:var(--bone-dim);max-width:var(--space-480); margin-top:1.2rem; }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01 — Masked line reveal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"Space Grotesk",sans-serif; overflow-x:clip; }
+  .mono { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  /* content must be readable without JS — .line-inner is only hidden by gsap.from() */
+  .hero {
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:flex-end; gap:2.5rem;
+    padding:clamp(1.25rem,4vw,4rem);
+  }
+  .kicker { display:flex; align-items:center; gap:1rem; color:var(--bone-dim); }
+  .kicker span:first-child { color:var(--vermillion); }
+  .kicker span:last-child::before {
+    content:""; display:inline-block; width:3.2rem; height:1px;
+    background:var(--bone-faint); margin-right:.9rem; vertical-align:middle;
+  }
+  .title {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(3rem,10.5vw,10.5rem); line-height:.94;
+  }
+  .line { display:block; overflow:hidden; padding-bottom:.06em; margin-bottom:-.06em; }
+  .line-inner { display:block; will-change:transform; }
+  .line-inner.accent { color:var(--vermillion); }
+  .lede { max-width:34rem; color:var(--bone-dim); border-top:1px solid var(--bone-faint); padding-top:1.6rem; }
+</style>
+</head>
+<body>
+<section class="hero">
+  <p class="kicker mono" data-hero="kicker"><span>01</span><span>A field guide to movement</span></p>
+
+  <h1 class="title" aria-label="Charting the space between still and motion">
+    <span class="line" aria-hidden="true"><span class="line-inner" data-hero="line">Charting the</span></span>
+    <span class="line" aria-hidden="true"><span class="line-inner" data-hero="line">space between</span></span>
+    <span class="line" aria-hidden="true"><span class="line-inner accent" data-hero="line">still &amp; motion</span></span>
+  </h1>
+
+  <p class="lede" data-hero="lede">A one-line supporting statement that earns its place under the headline. Replace me with your own copy.</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: headline lines rise out of overflow masks (power4.out),
+  // staggered 0.11 — the kicker and lede wait their turn. Reduced motion:
+  // skip entirely; gsap.from() leaves the DOM default as the final state.
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.timeline({ defaults:{ ease:"power4.out" } })
+      .from('[data-hero="line"]',   { yPercent:118, duration:1.2, stagger:0.11 })
+      .from('[data-hero="kicker"]', { y:16, autoAlpha:0, duration:.8 }, 0.12)
+      .from('[data-hero="lede"]',   { y:26, autoAlpha:0, duration:.9 }, "-=0.55");
+  }
+</script>
+</body>
+</html>

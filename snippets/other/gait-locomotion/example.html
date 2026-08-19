@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>53 — Gait locomotion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3;
+    /* one stride of the machine — the track is ruled in exactly this unit */
+    --stride:clamp(30px, 5.5vw, 46px);
+    --leg:clamp(104px, 16svh, 150px);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"Space Grotesk",sans-serif; overflow:hidden; }
+  .mono { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; padding:clamp(1.25rem,3vw,2.5rem) clamp(1.25rem,4vw,4rem) clamp(1rem,3vw,2rem); gap:clamp(.75rem,2vh,1.25rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); font-family:"IBM Plex Mono",monospace; }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .track { position:relative; flex:1; min-height:0; cursor:crosshair; touch-action:none; user-select:none; }
+  .track::after { content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, transparent 0%, transparent 71%, rgba(242,237,227,.05) 71%, rgba(242,237,227,.05) 100%); }
+
+  /* the measured track: a ground line plus a ruler in whole strides.
+     the accent mark lands every fifth stride, so slip is visible across
+     any distance larger than one step. */
+  .ground { position:absolute; left:0; right:0; top:72%; height:1px; background:rgba(242,237,227,.3); }
+  .strides { position:absolute; left:0; right:0; top:72%; height:14px; overflow:hidden;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,74,23,.42) 0 1px, transparent 1px calc(var(--stride) * 5)),
+      repeating-linear-gradient(90deg, rgba(242,237,227,.3) 0 1px, transparent 1px var(--stride)); }
+
+  /* the machine */
+  .rover { position:absolute; inset:0; pointer-events:none; }
+  .rover__body {
+    position:absolute; left:50%; top:0; z-index:2; width:clamp(240px, 32vw, 320px); height:clamp(64px, 11svh, 88px);
+    background:var(--ink-2); border:1px solid var(--bone-faint); border-radius:3px;
+    padding:.6rem .85rem; display:flex; flex-direction:column; justify-content:space-between;
+    transform-origin:50% 100%;
+  }
+  .rover__kicker { color:var(--vermillion); font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; font-family:"IBM Plex Mono",monospace; }
+  .rover__title { font-family:"Anton",sans-serif; font-weight:400; font-size:clamp(1.2rem,4vw,1.9rem); line-height:.95; text-transform:uppercase; color:var(--bone); }
+  .rover__row { display:flex; align-items:baseline; justify-content:space-between; gap:1rem; }
+  .rover__dash { color:var(--bone-dim); font-size:.62rem; }
+  .rover__stripe { display:block; position:absolute; left:0; right:0; bottom:-1px; height:3px;
+    background:repeating-linear-gradient(90deg, var(--vermillion) 0 10px, transparent 10px 18px); }
+
+  /* mechanical limbs: each strut passes exactly through its foot, so a
+     planted foot is a hard ground contact, never a hover */
+  .leg { position:absolute; left:0; top:0; }
+  .leg__strut { position:absolute; left:0; top:0; width:7px; height:var(--leg); border-radius:2px;
+    background:linear-gradient(180deg, var(--vermillion), #f0631f 60%, #c93a0c); transform-origin:50% 0%; }
+  .leg__hip { position:absolute; left:-4px; top:-4px; width:15px; height:15px; border-radius:50%;
+    background:var(--amber); box-shadow:0 0 0 3px rgba(255,196,61,.14); }
+  .leg__foot { position:absolute; width:28px; height:8px; border-radius:2px;
+    background:var(--bone); }
+
+  .hint { font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); font-family:"IBM Plex Mono",monospace; display:flex; flex-wrap:wrap; gap:.4rem 1.5rem; }
+  .hint b { color:var(--bone); font-weight:400; }
+  .hint .accent { color:var(--teal); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track { cursor:default; }
+  }
+</style>
+</head>
+<body>
+<section class="stage">
+  <p class="kicker"><b>53</b>Gait locomotion</p>
+
+  <div class="track" data-gait="track" aria-label="A four-legged machine walks along a track ruled in whole strides. Move the pointer to make it walk; hold it at the centre to freeze the gait.">
+    <div class="ground"></div>
+    <div class="strides"></div>
+
+    <div class="rover" data-gait="rover">
+      <div class="rover__body" data-gait="body">
+        <p class="rover__kicker">phase-locked locomotion</p>
+        <div class="rover__row">
+          <h1 class="rover__title">Keep<br>in step</h1>
+          <span class="rover__dash mono" data-gait="dash">stride 00 · hld 0.00</span>
+        </div>
+        <span class="rover__stripe"></span>
+      </div>
+    </div>
+
+    <!-- limbs hang from the girder; each foot is solved against the ruled
+         ground, so stance is a hard plant and swing lifts exactly one stride -->
+    <div class="leg" data-gait="leg" style="transform:translateX(calc(50% - 92px)) rotate(-15deg)"><span class="leg__hip"></span><span class="leg__strut"></span><span class="leg__foot"></span></div>
+    <div class="leg" data-gait="leg" style="transform:translateX(calc(50% - 31px)) rotate(8deg)"><span class="leg__hip"></span><span class="leg__strut"></span><span class="leg__foot"></span></div>
+    <div class="leg" data-gait="leg" style="transform:translateX(calc(50% + 31px)) rotate(-8deg)"><span class="leg__hip"></span><span class="leg__strut"></span><span class="leg__foot"></span></div>
+    <div class="leg" data-gait="leg" style="transform:translateX(calc(50% + 92px)) rotate(15deg)"><span class="leg__hip"></span><span class="leg__strut"></span><span class="leg__foot"></span></div>
+  </div>
+
+  <p class="hint"><span><b>steer</b> pointer or ← → keys — the machine walks at your pace</span><span class="accent">at the centre it freezes mid-stride</span><span>the track is ruled in strides — a planted foot must not slip</span></p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: a four-limb machine whose feet are phase-locked to a ruled
+  // track — each foot is glued to the ground for one half of its cycle
+  // (stance), then swung exactly one stride ahead; the pointer sets
+  // direction + stride rate and the centre dead-zone freezes the gait
+  // mid-pose. Derived from the old walking-castle experiment: the gait
+  // phase-locks to travel speed, so the machine can never skid. Reduced
+  // motion: the machine simply stands on the ruler.
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduced) {
+    const track = document.querySelector('[data-gait="track"]');
+    const rover = document.querySelector('[data-gait="rover"]');
+    const bodyEl = document.querySelector('[data-gait="body"]');
+    const dash = document.querySelector('[data-gait="dash"]');
+    const legEls = gsap.utils.toArray('[data-gait="leg"]');
+    const struts = legEls.map((l) => l.querySelector(".leg__strut"));
+    const feet = legEls.map((l) => l.querySelector(".leg__foot"));
+
+    // measured constants — the ruler on the ground IS the stride unit
+    const css = getComputedStyle(document.documentElement);
+    const S = parseFloat(css.getPropertyValue("--stride"));   // px per stride
+    let L = parseFloat(css.getPropertyValue("--leg"));        // leg length
+    const HIP = [-0.92, -0.31, 0.31, 0.92];                   // hip offsets (× half body)
+    const PHASES = [0, 0.5, 0.5, 0];                          // bound gait: outer pair, inner pair
+    const swingEase = gsap.parseEase("power2.inOut");
+
+    let halfW = 0, GY = 0, hipY = 0;
+    function measure() {
+      const r = track.getBoundingClientRect();
+      halfW = Math.min(bodyEl.offsetWidth / 2, r.width * 0.32);
+      GY = r.height * 0.72;
+      L = Math.min(L, GY - 40);
+      hipY = GY - L;
+      // feet plant on the ruler: each leg's neutral tile is under its hip
+      legEls.forEach((_, i) => { plant[i] = Math.round((HIP[i] * halfW) / S); });
+      // the no-JS stance transforms are decorative — neutralise them once JS poses the limbs
+      legEls.forEach((l) => gsap.set(l, { x: 0, y: 0, rotation: 0 }));
+    }
+
+    let phase = 0, rate = 0, targetRate = 0, roverX = 0, lastDir = 1;
+    const plant = [0, 0, 0, 0];
+    const swingDir = [0, 0, 0, 0];   // direction each leg committed to when it took off (0 = planted)
+    const prevStance = [true, true, true, true];
+
+    // steering — pointer X maps to signed stride rate; keys as a fallback
+    function steer(norm) {                          // norm ∈ [-0.5, 0.5]
+      const dz = 0.06;                              // central dead-zone = halt
+      const mag = Math.max(0, Math.abs(norm) - dz) / (0.5 - dz);
+      targetRate = Math.sign(norm || 0) * mag * 1.6;
+    }
+    track.addEventListener("pointermove", (e) => {
+      const r = track.getBoundingClientRect();
+      steer((e.clientX - r.left) / r.width - 0.5);
+    });
+    track.addEventListener("pointerleave", () => { targetRate = 0; });
+    let keys = { left:false, right:false };
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { keys.left = true; targetRate = -1.6; }
+      if (e.key === "ArrowRight") { keys.right = true; targetRate = 1.6; }
+    });
+    document.addEventListener("keyup", (e) => {
+      if (e.key === "ArrowLeft") keys.left = false;
+      if (e.key === "ArrowRight") keys.right = false;
+      if (!keys.left && !keys.right) targetRate = 0;
+    });
+    window.addEventListener("resize", measure);
+
+    function step(time, deltaTime) {
+      const dt = Math.min(deltaTime / 1000, 0.033);
+
+      // integrate stride rate with a little inertia — ease to a halt
+      rate += (targetRate - rate) * Math.min(1, dt * 4);
+      if (Math.abs(rate) < 0.004 && Math.abs(targetRate) < 0.004) rate = 0;
+      const dir = rate > 0.0001 ? 1 : rate < -0.0001 ? -1 : lastDir;
+      lastDir = dir;
+
+      // gait phase always advances forward in time; going backwards means
+      // the swing travels against the clock, not the phase
+      phase += Math.abs(rate) * dt;
+      if (phase >= 1) phase -= 1;
+
+      // the machine translates with the gait — never independent of it.
+      // the wrap distance is an exact whole number of strides, so even the
+      // teleport across the stage moves feet without ever breaking a plant
+      roverX += rate * S * dt;
+      const margin = Math.ceil((track.clientWidth / 2 + L * 2) / S) * S;
+      const tileShift = margin * 2 / S;
+      if (roverX > margin)      { roverX -= margin * 2; plant.forEach((_, i) => plant[i] -= tileShift); }
+      else if (roverX < -margin){ roverX += margin * 2; plant.forEach((_, i) => plant[i] += tileShift); }
+      gsap.set(rover, { x: roverX });
+
+      legEls.forEach((_, i) => {
+        let fi = (phase + PHASES[i]) % 1;   // wraps 1→0 at each landing
+        const stance = fi < 0.5;
+        if (stance) {
+          if (!prevStance[i]) {              // the swing just finished → the foot re-plants
+            plant[i] += swingDir[i];         // one stride in the direction it committed to
+            swingDir[i] = 0;
+          }
+        } else if (prevStance[i]) {
+          swingDir[i] = dir;                 // takeoff — the foot commits to this direction
+        }
+        prevStance[i] = stance;
+
+        let footX, footY;
+        if (stance) {
+          footX = plant[i] * S;              // glued — zero slip
+          footY = GY;
+        } else {
+          const t = swingEase((fi - 0.5) * 2);
+          footX = plant[i] * S + swingDir[i] * S * t;   // one stride, committed direction
+          footY = GY - Math.sin(Math.PI * (fi - 0.5)) * 14;  // airborne
+        }
+
+        const hipX = roverX + HIP[i] * halfW;
+        const dx = footX - hipX;
+        const dy = footY - hipY;
+        const dist = Math.hypot(dx, dy);
+        const rotation = Math.atan2(dx, dy) * 180 / Math.PI;   // strut passes through the foot
+        gsap.set(struts[i], { x: hipX - 3.5, y: hipY, rotation, scaleY: dist / L, transformOrigin: "50% 0%" });
+        gsap.set(feet[i], { x: footX - 14, y: footY - 4 });
+      });
+
+      // weight transfer — the girder heaves twice per cycle, at each plant
+      const bob = Math.cos(phase * Math.PI * 4) * 6;
+      const rock = Math.sin(phase * Math.PI * 4) * 1.2;
+      gsap.set(bodyEl, { xPercent: -50, y: bob, rotation: rock, transformOrigin: "50% 100%" });
+
+      // the machine's own odometer
+      const dirLabel = Math.abs(rate) < 0.005 ? "hld" : (rate > 0 ? "fwd" : "rev");
+      const strideN = Math.round(Math.abs(plant[0]));
+      const text = "stride " + String(strideN % 100).padStart(2, "0") + " · " + dirLabel + " " + Math.abs(rate).toFixed(2);
+      if (dash.textContent !== text) dash.textContent = text;
+    }
+
+    measure();
+    gsap.ticker.add(step);
+  }
+</script>
+</body>
+</html>

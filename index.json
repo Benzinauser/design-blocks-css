@@ -1,0 +1,2825 @@
+{
+ "meta": {
+  "schema_version": "1.0",
+  "generated_for": "snippet library migration",
+  "base_unit": "4px",
+  "total": 73,
+  "categories": {
+   "layout": 10,
+   "media": 6,
+   "other": 34,
+   "typography": 17,
+   "hero": 1,
+   "buttons": 2,
+   "feedback": 1,
+   "cards": 1,
+   "nav": 1
+  }
+ },
+ "snippets": [
+  {
+   "name": "benzina-portfolio",
+   "category": "layout",
+   "path": "snippets/layout/benzina-portfolio",
+   "status": "needs-review",
+   "tags": [
+    "package",
+    "layout"
+   ],
+   "description": "package snippet in the layout category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "cap-hint",
+     "cap-list",
+     "cap-meta",
+     "cap-slide",
+     "cap-slides",
+     "cap-text1",
+     "cap-text2",
+     "caps",
+     "cursor-trail",
+     "footer",
+     "footer__left",
+     "footer__mid",
+     "footer__right",
+     "footer__watermark",
+     "hero",
+     "hero-poster",
+     "line--1",
+     "line--2",
+     "line--3",
+     "line--4"
+    ],
+    "data_attributes": [
+     "data-1",
+     "data-2",
+     "data-3",
+     "data-slide-count",
+     "data-slider",
+     "data-svc"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js",
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "benzina-portfolio/src/index.html"
+  },
+  {
+   "name": "draggable-infinite-slider-gsaposmo",
+   "category": "media",
+   "path": "snippets/media/draggable-infinite-slider-gsaposmo",
+   "status": "needs-review",
+   "tags": [
+    "package",
+    "media"
+   ],
+   "description": "package snippet in the media category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "active",
+     "bottom-left",
+     "bottom-right",
+     "button",
+     "button-arrow",
+     "button-overlay",
+     "caption",
+     "caption-dot",
+     "cloneable",
+     "count-column",
+     "count-heading",
+     "count-row-divider",
+     "main",
+     "next",
+     "osmo-credits",
+     "osmo-credits__p",
+     "osmo-credits__p-a",
+     "overlay",
+     "overlay-corner",
+     "overlay-count-row"
+    ],
+    "data_attributes": [
+     "data-slide-count",
+     "data-slider"
+    ],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "draggable-infinite-slider-gsaposmo/dist/index.html"
+  },
+  {
+   "name": "elastic-accordion-gsap",
+   "category": "other",
+   "path": "snippets/other/elastic-accordion-gsap",
+   "status": "stable",
+   "tags": [
+    "package",
+    "other"
+   ],
+   "description": "package snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "group",
+     "item"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "elastic-accordion-gsap/dist/index.html"
+  },
+  {
+   "name": "gsap-grid",
+   "category": "layout",
+   "path": "snippets/layout/gsap-grid",
+   "status": "stable",
+   "tags": [
+    "package",
+    "layout"
+   ],
+   "description": "package snippet in the layout category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "ball",
+     "bar",
+     "black",
+     "blue",
+     "box",
+     "box-content",
+     "circle",
+     "color_pallet",
+     "ellipse",
+     "eye",
+     "eye-pupil",
+     "following-star",
+     "half-circle",
+     "line",
+     "morph-box",
+     "morph-shapes",
+     "random-circle",
+     "red",
+     "rotating-star",
+     "square-stroke"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "gsap-grid/dist/index.html"
+  },
+  {
+   "name": "gsap-scrolltriggerdemo",
+   "category": "other",
+   "path": "snippets/other/gsap-scrolltriggerdemo",
+   "status": "stable",
+   "tags": [
+    "package",
+    "other"
+   ],
+   "description": "package snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [],
+    "data_attributes": [],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "gsap-scrolltriggerdemo/dist/index.html"
+  },
+  {
+   "name": "howl-s-moving-castle",
+   "category": "other",
+   "path": "snippets/other/howl-s-moving-castle",
+   "status": "stable",
+   "tags": [
+    "package",
+    "other"
+   ],
+   "description": "package snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "antenna",
+     "background",
+     "blbottom",
+     "blbottom-group",
+     "blcover",
+     "blfoot",
+     "blleg",
+     "bltop",
+     "brbottom",
+     "brfoot",
+     "brleg",
+     "cannon",
+     "castle",
+     "castle-container",
+     "chimney1",
+     "chimney2",
+     "chimney3",
+     "cloud-bg",
+     "cloud-bg2",
+     "cloud-shadow1"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "howl-s-moving-castle/dist/index.html"
+  },
+  {
+   "name": "mask-animation-with-gsap-svg",
+   "category": "other",
+   "path": "snippets/other/mask-animation-with-gsap-svg",
+   "status": "stable",
+   "tags": [
+    "package",
+    "other"
+   ],
+   "description": "package snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "slide",
+     "slides"
+    ],
+    "data_attributes": [
+     "data-1",
+     "data-2",
+     "data-3"
+    ],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "mask-animation-with-gsap-svg/dist/index.html"
+  },
+  {
+   "name": "motion-atlas",
+   "category": "other",
+   "path": "snippets/other/motion-atlas",
+   "status": "stable",
+   "tags": [
+    "package",
+    "atlas",
+    "other"
+   ],
+   "description": "package snippet in the other category",
+   "tokens_used": [
+    "--space-4"
+   ],
+   "markup_requires": {
+    "classes": [
+     "ambient",
+     "btn",
+     "btn--ghost",
+     "cap-body",
+     "cap-body-inner",
+     "cap-item",
+     "cap-list",
+     "cap-name",
+     "cap-num",
+     "cap-plus",
+     "cap-row",
+     "capabilities",
+     "card",
+     "card--v1",
+     "card--v2",
+     "card--v3",
+     "card--v4",
+     "card--v5",
+     "card--v6",
+     "card--v7"
+    ],
+    "data_attributes": [
+     "data-cap",
+     "data-dir",
+     "data-fill",
+     "data-header",
+     "data-hero",
+     "data-outro",
+     "data-reel",
+     "data-scroll-to",
+     "data-section",
+     "data-transit"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js",
+     "https://assets.codepen.io/16327/InertiaPlugin.min.js",
+     "https://assets.codepen.io/16327/SplitText3.min.js",
+     "https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js",
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/src/index.html"
+  },
+  {
+   "name": "scrolling-rainbowgsap-scrolltrigger-scrollsmoother",
+   "category": "other",
+   "path": "snippets/other/scrolling-rainbowgsap-scrolltrigger-scrollsmoother",
+   "status": "stable",
+   "tags": [
+    "package",
+    "other"
+   ],
+   "description": "package snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "scroll",
+     "st1"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "scrolling-rainbowgsap-scrolltrigger-scrollsmoother/dist/index.html"
+  },
+  {
+   "name": "text-scroll-and-hover-effect-with-gsap-and-clip",
+   "category": "typography",
+   "path": "snippets/typography/text-scroll-and-hover-effect-with-gsap-and-clip",
+   "status": "stable",
+   "tags": [
+    "package",
+    "typography"
+   ],
+   "description": "package snippet in the typography category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "container",
+     "text"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "text-scroll-and-hover-effect-with-gsap-and-clip/dist/index.html"
+  },
+  {
+   "name": "the-jamswissted",
+   "category": "typography",
+   "path": "snippets/typography/the-jamswissted",
+   "status": "stable",
+   "tags": [
+    "package",
+    "typography"
+   ],
+   "description": "package snippet in the typography category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "a",
+     "band",
+     "bg",
+     "container",
+     "content",
+     "date",
+     "dot",
+     "guests",
+     "intro",
+     "jam",
+     "jm",
+     "location",
+     "stage"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "the-jamswissted/dist/index.html"
+  },
+  {
+   "name": "the-policeswissted",
+   "category": "typography",
+   "path": "snippets/typography/the-policeswissted",
+   "status": "stable",
+   "tags": [
+    "package",
+    "typography"
+   ],
+   "description": "package snippet in the typography category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "band",
+     "content",
+     "date",
+     "details",
+     "freq",
+     "location",
+     "stage"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "./script.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "the-policeswissted/dist/index.html"
+  },
+  {
+   "name": "hero-line-mask",
+   "category": "hero",
+   "path": "snippets/hero/hero-line-mask",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "hero",
+    "headline",
+    "lines",
+    "rise",
+    "overflow",
+    "masks",
+    "power4"
+   ],
+   "description": "Design note: headline lines rise out of overflow masks (power4.out),",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "accent",
+     "hero",
+     "kicker",
+     "lede",
+     "line",
+     "line-inner",
+     "mono",
+     "title"
+    ],
+    "data_attributes": [
+     "data-hero"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/01-hero-line-mask.html"
+  },
+  {
+   "name": "reel-infinite-drag",
+   "category": "media",
+   "path": "snippets/media/reel-infinite-drag",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "media",
+    "endless",
+    "horizontal",
+    "field",
+    "drag",
+    "inertia",
+    "snap"
+   ],
+   "description": "Design note: an endless horizontal field — drag with inertia, snap to",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "card",
+     "controls",
+     "count",
+     "count-current",
+     "count-total",
+     "figure",
+     "fill",
+     "head",
+     "idx",
+     "label",
+     "list",
+     "mono",
+     "rail",
+     "reel",
+     "track",
+     "viewport"
+    ],
+    "data_attributes": [
+     "data-reel"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js",
+     "https://assets.codepen.io/16327/InertiaPlugin.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/02-reel-infinite-drag.html"
+  },
+  {
+   "name": "transit-opposite-drift",
+   "category": "other",
+   "path": "snippets/other/transit-opposite-drift",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "section",
+    "pins",
+    "while",
+    "east",
+    "track",
+    "exits"
+   ],
+   "description": "Design note: the section pins while the east track exits left and the",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "head",
+     "plate",
+     "plate--a",
+     "plate--b",
+     "plate--c",
+     "plate--d",
+     "plate--e",
+     "plate--f",
+     "plate--g",
+     "plate--h",
+     "plate--i",
+     "plate--j",
+     "track",
+     "track-inner",
+     "transit"
+    ],
+    "data_attributes": [
+     "data-dir",
+     "data-index",
+     "data-transit"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/03-transit-opposite-drift.html"
+  },
+  {
+   "name": "manifesto-clip-fill",
+   "category": "typography",
+   "path": "snippets/typography/manifesto-clip-fill",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "each",
+    "line",
+    "gradient",
+    "fill",
+    "scrubbed",
+    "width"
+   ],
+   "description": "Design note: each line's gradient fill is scrubbed from 0% to 100% width",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "accent",
+     "fill",
+     "ghost",
+     "kicker",
+     "line",
+     "manifesto",
+     "note",
+     "statement"
+    ],
+    "data_attributes": [
+     "data-fill"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/04-manifesto-clip-fill.html"
+  },
+  {
+   "name": "index-elastic-rows",
+   "category": "layout",
+   "path": "snippets/layout/index-elastic-rows",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "layout",
+    "open",
+    "time",
+    "body",
+    "height",
+    "springs"
+   ],
+   "description": "Design note: one row open at a time; the body height springs open with an",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "body",
+     "body-inner",
+     "head",
+     "index",
+     "item",
+     "list",
+     "mono",
+     "name",
+     "num",
+     "plus",
+     "row"
+    ],
+    "data_attributes": [
+     "data-cap",
+     "data-open"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/05-index-elastic-rows.html"
+  },
+  {
+   "name": "outro-char-rise",
+   "category": "typography",
+   "path": "snippets/typography/outro-char-rise",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "line",
+    "split",
+    "into",
+    "characters",
+    "rise",
+    "fold"
+   ],
+   "description": "Design note: one line, split into characters that rise out of the fold",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "line",
+     "meta",
+     "outro"
+    ],
+    "data_attributes": [
+     "data-outro"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js",
+     "https://assets.codepen.io/16327/SplitText3.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/06-outro-char-rise.html"
+  },
+  {
+   "name": "blur-resolve-text",
+   "category": "typography",
+   "path": "snippets/typography/blur-resolve-text",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "characters",
+    "resolve",
+    "blur",
+    "lift",
+    "into",
+    "sharp"
+   ],
+   "description": "Design note: characters resolve from blur + lift into sharp focus,",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "hero",
+     "kicker",
+     "lede",
+     "title"
+    ],
+    "data_attributes": [
+     "data-blur"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js",
+     "https://assets.codepen.io/16327/SplitText3.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/07-blur-resolve-text.html"
+  },
+  {
+   "name": "scramble-decode-text",
+   "category": "typography",
+   "path": "snippets/typography/scramble-decode-text",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "each",
+    "line",
+    "decodes",
+    "noise",
+    "into",
+    "message"
+   ],
+   "description": "Design note: each line decodes from noise into its message, one after",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "decode",
+     "hint",
+     "kicker",
+     "line",
+     "lines",
+     "tag"
+    ],
+    "data_attributes": [
+     "data-open",
+     "data-scramble",
+     "data-scramble-target"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js",
+     "https://assets.codepen.io/16327/ScrambleTextPlugin3.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/08-scramble-decode-text.html"
+  },
+  {
+   "name": "auto-marquee",
+   "category": "typography",
+   "path": "snippets/typography/auto-marquee",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "seamless",
+    "auto",
+    "marquee",
+    "each",
+    "track",
+    "duplicates"
+   ],
+   "description": "Design note: seamless auto-marquee — each track duplicates its content",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "marquee",
+     "marquee-row",
+     "page"
+    ],
+    "data_attributes": [
+     "data-marquee"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/09-auto-marquee.html"
+  },
+  {
+   "name": "clip-panel-reveal",
+   "category": "other",
+   "path": "snippets/other/clip-panel-reveal",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "each",
+    "panel",
+    "unmasks",
+    "edge",
+    "clip",
+    "path"
+   ],
+   "description": "Design note: each panel unmasks from the top edge (clip-path inset) as it",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "grid",
+     "kicker",
+     "panel",
+     "panel--a",
+     "panel--b",
+     "panel--c",
+     "reveal"
+    ],
+    "data_attributes": [
+     "data-clip"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/10-clip-panel-reveal.html"
+  },
+  {
+   "name": "count-up",
+   "category": "typography",
+   "path": "snippets/typography/count-up",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "figures",
+    "count",
+    "they",
+    "enter",
+    "measured",
+    "arithmetical"
+   ],
+   "description": "Design note: figures count up as they enter — a measured, arithmetical",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "grid",
+     "kicker",
+     "label",
+     "stat",
+     "stats",
+     "value"
+    ],
+    "data_attributes": [
+     "data-count",
+     "data-target"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/11-count-up.html"
+  },
+  {
+   "name": "sticky-stack",
+   "category": "other",
+   "path": "snippets/other/sticky-stack",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "pinned",
+    "stack",
+    "each",
+    "card",
+    "rises",
+    "below"
+   ],
+   "description": "Design note: pinned stack — each card rises from below and covers the",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "card",
+     "card--a",
+     "card--b",
+     "card--c",
+     "cards",
+     "intro",
+     "stack",
+     "tail"
+    ],
+    "data_attributes": [
+     "data-stack"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/12-sticky-stack.html"
+  },
+  {
+   "name": "reading-highlight",
+   "category": "typography",
+   "path": "snippets/typography/reading-highlight",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "each",
+    "word",
+    "turns",
+    "full",
+    "scroll",
+    "passes"
+   ],
+   "description": "Design note: each word turns from dim to full ink as the scroll passes —",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "copy",
+     "hint",
+     "kicker",
+     "read"
+    ],
+    "data_attributes": [
+     "data-read"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js",
+     "https://assets.codepen.io/16327/SplitText3.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/13-reading-highlight.html"
+  },
+  {
+   "name": "tilt-parallax",
+   "category": "other",
+   "path": "snippets/other/tilt-parallax",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "whole",
+    "stage",
+    "tilts",
+    "toward",
+    "cursor",
+    "quickto"
+   ],
+   "description": "Design note: the whole stage tilts toward the cursor (quickTo) while each",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "dot",
+     "layer",
+     "layer--text",
+     "mono",
+     "orb",
+     "orb--a",
+     "orb--b",
+     "ring",
+     "scene",
+     "scene-inner",
+     "tag"
+    ],
+    "data_attributes": [
+     "data-depth",
+     "data-tilt"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/14-tilt-parallax.html"
+  },
+  {
+   "name": "curtain-reveal",
+   "category": "other",
+   "path": "snippets/other/curtain-reveal",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "half",
+    "screen",
+    "curtains",
+    "part",
+    "opposite",
+    "edges"
+   ],
+   "description": "Design note: two half-screen curtains part to opposite edges as you",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "backdrop",
+     "curtain",
+     "curtain--l",
+     "curtain--r",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-curtain"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/15-curtain-reveal.html"
+  },
+  {
+   "name": "magnetic-button",
+   "category": "buttons",
+   "path": "snippets/buttons/magnetic-button",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "buttons",
+    "within",
+    "small",
+    "radius",
+    "button",
+    "pulled",
+    "toward"
+   ],
+   "description": "Design note: within a small radius the button is pulled toward the cursor",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "hint",
+     "kicker",
+     "magnetic",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-magnetic"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/16-magnetic-button.html"
+  },
+  {
+   "name": "scroll-progress",
+   "category": "feedback",
+   "path": "snippets/feedback/scroll-progress",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "feedback",
+    "fixed",
+    "rail",
+    "fills",
+    "scroll",
+    "progress",
+    "scaley"
+   ],
+   "description": "Design note: a fixed rail fills with scroll progress (scaleY) and the",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "fill",
+     "pct",
+     "progress",
+     "sec",
+     "sections",
+     "track"
+    ],
+    "data_attributes": [
+     "data-progress"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/17-scroll-progress.html"
+  },
+  {
+   "name": "flip-card",
+   "category": "cards",
+   "path": "snippets/cards/flip-card",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "cards",
+    "spin",
+    "rotationy",
+    "reveal",
+    "back",
+    "face"
+   ],
+   "description": "Design note: cards spin on rotationY to reveal a back face — hover for",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "back",
+     "card",
+     "card-inner",
+     "deck",
+     "face",
+     "front--a",
+     "front--b",
+     "front--c",
+     "grid",
+     "kicker"
+    ],
+    "data_attributes": [
+     "data-flip"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/18-flip-card.html"
+  },
+  {
+   "name": "hover-expand-gallery",
+   "category": "media",
+   "path": "snippets/media/hover-expand-gallery",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "media",
+    "hovering",
+    "panel",
+    "grows",
+    "flex",
+    "share",
+    "while"
+   ],
+   "description": "Design note: hovering a panel grows its flex share while its neighbours",
+   "tokens_used": [
+    "--space-64"
+   ],
+   "markup_requires": {
+    "classes": [
+     "gallery",
+     "gallery-wrap",
+     "kicker",
+     "panel",
+     "panel--a",
+     "panel--b",
+     "panel--c",
+     "panel--d",
+     "panel--e"
+    ],
+    "data_attributes": [
+     "data-gallery"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/19-hover-expand-gallery.html"
+  },
+  {
+   "name": "velocity-skew",
+   "category": "other",
+   "path": "snippets/other/velocity-skew",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "every",
+    "block",
+    "leans",
+    "skewx",
+    "proportional",
+    "scroll"
+   ],
+   "description": "Design note: every block leans by skewX proportional to scroll velocity",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "block",
+     "blocks",
+     "hint",
+     "num"
+    ],
+    "data_attributes": [
+     "data-velocity"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/20-velocity-skew.html"
+  },
+  {
+   "name": "wave-text",
+   "category": "typography",
+   "path": "snippets/typography/wave-text",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "ambient",
+    "ripple",
+    "travels",
+    "across",
+    "characters",
+    "gentle"
+   ],
+   "description": "Design note: an ambient ripple travels across the characters — a gentle,",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "hint",
+     "kicker",
+     "line",
+     "wave"
+    ],
+    "data_attributes": [
+     "data-wave"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://assets.codepen.io/16327/SplitText3.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/21-wave-text.html"
+  },
+  {
+   "name": "morph-blob",
+   "category": "other",
+   "path": "snippets/other/morph-blob",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "blob",
+    "breathes",
+    "through",
+    "four",
+    "poses",
+    "identical"
+   ],
+   "description": "Design note: an SVG blob breathes through four poses (identical command",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "hint",
+     "kicker",
+     "morph"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://assets.codepen.io/16327/MorphSVGPlugin3.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/22-morph-blob.html"
+  },
+  {
+   "name": "cursor-spotlight",
+   "category": "other",
+   "path": "snippets/other/cursor-spotlight",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "bright",
+    "copy",
+    "headline",
+    "clipped",
+    "circle"
+   ],
+   "description": "Design note: a bright copy of the headline is clipped to a circle that",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "bright",
+     "dim",
+     "hint",
+     "stage",
+     "title"
+    ],
+    "data_attributes": [
+     "data-spot"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/23-cursor-spotlight.html"
+  },
+  {
+   "name": "horizontal-panels",
+   "category": "other",
+   "path": "snippets/other/horizontal-panels",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "section",
+    "pins",
+    "while",
+    "panel",
+    "slides",
+    "east"
+   ],
+   "description": "Design note: the section pins while the panel row slides east-to-west",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "counter",
+     "hscroll",
+     "idx",
+     "panel",
+     "track"
+    ],
+    "data_attributes": [
+     "data-hscroll"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/24-horizontal-panels.html"
+  },
+  {
+   "name": "odometer-roll",
+   "category": "typography",
+   "path": "snippets/typography/odometer-roll",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "mechanical",
+    "counter",
+    "each",
+    "digit",
+    "column",
+    "spins"
+   ],
+   "description": "Design note: a mechanical counter — each digit column spins from a random",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "col",
+     "digits",
+     "kicker",
+     "label",
+     "odo",
+     "odo-wrap"
+    ],
+    "data_attributes": [
+     "data-odo",
+     "data-target"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/25-odometer-roll.html"
+  },
+  {
+   "name": "fan-spread",
+   "category": "media",
+   "path": "snippets/media/fan-spread",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "media",
+    "cards",
+    "fanned",
+    "like",
+    "held",
+    "hand",
+    "hovering"
+   ],
+   "description": "Design note: cards sit fanned like a held hand; hovering the pile spreads",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "card",
+     "card--a",
+     "card--b",
+     "card--c",
+     "card--d",
+     "card--e",
+     "fan",
+     "fan-wrap",
+     "hint",
+     "kicker"
+    ],
+    "data_attributes": [
+     "data-fan"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/26-fan-spread.html"
+  },
+  {
+   "name": "throw-settle",
+   "category": "other",
+   "path": "snippets/other/throw-settle",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "physics",
+    "throw",
+    "drag",
+    "card",
+    "release",
+    "velocity"
+   ],
+   "description": "Design note: a physics throw — drag the card, release with velocity and",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "card",
+     "hedge",
+     "hint",
+     "kicker",
+     "stage",
+     "tray"
+    ],
+    "data_attributes": [
+     "data-throw"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js",
+     "https://assets.codepen.io/16327/InertiaPlugin.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/27-throw-settle.html"
+  },
+  {
+   "name": "spring-trail",
+   "category": "other",
+   "path": "snippets/other/spring-trail",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "spring",
+    "mass",
+    "companion",
+    "blob",
+    "chases",
+    "cursor"
+   ],
+   "description": "Design note: a spring-mass companion — the blob chases the cursor with",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "blob",
+     "hint",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-trail"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/28-spring-trail.html"
+  },
+  {
+   "name": "hold-charge",
+   "category": "other",
+   "path": "snippets/other/hold-charge",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "tactile",
+    "commitment",
+    "charge",
+    "fills",
+    "while",
+    "hold"
+   ],
+   "description": "Design note: tactile commitment — charge fills while you hold (pointer",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "button",
+     "charge",
+     "hint",
+     "kicker",
+     "label",
+     "stage",
+     "track"
+    ],
+    "data_attributes": [
+     "data-charge"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/29-hold-charge.html"
+  },
+  {
+   "name": "magnetic-snap",
+   "category": "other",
+   "path": "snippets/other/magnetic-snap",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "tiles",
+    "start",
+    "shuffled",
+    "drag",
+    "into",
+    "slot"
+   ],
+   "description": "Design note: tiles start shuffled; drag one into a slot's magnetic field",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "board",
+     "kicker",
+     "slot",
+     "stage",
+     "status",
+     "tile",
+     "tile--1",
+     "tile--2",
+     "tile--3",
+     "tile--4",
+     "tile--5",
+     "tile--6"
+    ],
+    "data_attributes": [
+     "data-slot",
+     "data-snap"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/30-magnetic-snap.html"
+  },
+  {
+   "name": "slingshot-launch",
+   "category": "other",
+   "path": "snippets/other/slingshot-launch",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "stored",
+    "force",
+    "pulling",
+    "puck",
+    "down",
+    "draws"
+   ],
+   "description": "Design note: stored force — pulling the puck down draws the bands and",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "band",
+     "hint",
+     "kicker",
+     "puck",
+     "rail",
+     "rig",
+     "shot",
+     "stage",
+     "target",
+     "tension"
+    ],
+    "data_attributes": [
+     "data-sling"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/31-slingshot-launch.html"
+  },
+  {
+   "name": "detent-dial",
+   "category": "other",
+   "path": "snippets/other/detent-dial",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "mechanical",
+    "detent",
+    "knob",
+    "spins",
+    "freely",
+    "inertia"
+   ],
+   "description": "Design note: a mechanical detent — the knob spins freely with inertia,",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "dial",
+     "hint",
+     "kicker",
+     "knob",
+     "readout",
+     "ring",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-dial"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js",
+     "https://assets.codepen.io/16327/InertiaPlugin.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/32-detent-dial.html"
+  },
+  {
+   "name": "rotate-on-scroll",
+   "category": "other",
+   "path": "snippets/other/rotate-on-scroll",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "each",
+    "word",
+    "completes",
+    "full",
+    "rotation",
+    "while"
+   ],
+   "description": "Design note: each word completes one full rotation while it travels",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "lead",
+     "rot",
+     "tail",
+     "word"
+    ],
+    "data_attributes": [
+     "data-rot"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/33-rotate-on-scroll.html"
+  },
+  {
+   "name": "balloon-button",
+   "category": "buttons",
+   "path": "snippets/buttons/balloon-button",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "buttons",
+    "button",
+    "inflates",
+    "like",
+    "balloon",
+    "scale",
+    "corner"
+   ],
+   "description": "Design note: a button that inflates like a balloon — scale, corner and",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "arrow",
+     "balloon",
+     "hint",
+     "kicker",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-balloon"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/34-balloon-button.html"
+  },
+  {
+   "name": "carousel-3d",
+   "category": "media",
+   "path": "snippets/media/carousel-3d",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "media",
+    "five",
+    "cards",
+    "orbit",
+    "ring",
+    "dragging",
+    "spins"
+   ],
+   "description": "Design note: five cards orbit on a 3D ring; dragging spins the ring with",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "card3d",
+     "card3d--a",
+     "card3d--b",
+     "card3d--c",
+     "card3d--d",
+     "card3d--e",
+     "deck",
+     "kicker",
+     "pos",
+     "ring",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-car"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js",
+     "https://assets.codepen.io/16327/InertiaPlugin.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/35-carousel-3d.html"
+  },
+  {
+   "name": "grid-3d-stagger",
+   "category": "other",
+   "path": "snippets/other/grid-3d-stagger",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "grid",
+    "rises",
+    "flat",
+    "horizon",
+    "every",
+    "tile"
+   ],
+   "description": "Design note: the grid rises from a flat horizon — every tile stands up",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "grid",
+     "gridzone",
+     "kicker",
+     "tile3d",
+     "tile3d--a",
+     "tile3d--b",
+     "tile3d--c",
+     "tile3d--d",
+     "tile3d--e",
+     "tile3d--f",
+     "tile3d--g",
+     "tile3d--h"
+    ],
+    "data_attributes": [
+     "data-grid3"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/36-grid-3d-stagger.html"
+  },
+  {
+   "name": "line-draw-hover",
+   "category": "other",
+   "path": "snippets/other/line-draw-hover",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "each",
+    "word",
+    "rule",
+    "stroke",
+    "draws",
+    "left"
+   ],
+   "description": "Design note: each word's rule is an SVG stroke that draws from the left",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "hint",
+     "item",
+     "kicker",
+     "stage",
+     "words"
+    ],
+    "data_attributes": [
+     "data-line"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/37-line-draw-hover.html"
+  },
+  {
+   "name": "push-grid",
+   "category": "layout",
+   "path": "snippets/layout/push-grid",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "layout",
+    "hover",
+    "tile",
+    "asserts",
+    "itself",
+    "scale",
+    "shadow"
+   ],
+   "description": "Design note: hover a tile and it asserts itself (scale, shadow) while its",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "cell",
+     "cell--a",
+     "cell--b",
+     "cell--c",
+     "cell--d",
+     "cell--e",
+     "cell--f",
+     "cell--g",
+     "cell--h",
+     "cell--i",
+     "grid",
+     "hint",
+     "kicker",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-push"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/38-push-grid.html"
+  },
+  {
+   "name": "path-follow-scroll",
+   "category": "other",
+   "path": "snippets/other/path-follow-scroll",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "amber",
+    "marker",
+    "rides",
+    "route",
+    "progress",
+    "bound"
+   ],
+   "description": "Design note: an amber marker rides an SVG route, its progress bound one",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "journey",
+     "kicker",
+     "map",
+     "marker",
+     "route",
+     "route-draw",
+     "tags",
+     "waypoint"
+    ],
+    "data_attributes": [
+     "data-path"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/39-path-follow-scroll.html"
+  },
+  {
+   "name": "sliced-text",
+   "category": "typography",
+   "path": "snippets/typography/sliced-text",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "five",
+    "blades",
+    "word",
+    "each",
+    "clipped",
+    "band"
+   ],
+   "description": "Design note: five blades of one word, each clipped to its band of the",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "glass",
+     "hint",
+     "kicker",
+     "slice",
+     "slices"
+    ],
+    "data_attributes": [
+     "data-slice"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/40-sliced-text.html"
+  },
+  {
+   "name": "gooey-cursor",
+   "category": "other",
+   "path": "snippets/other/gooey-cursor",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "lead",
+    "blob",
+    "rides",
+    "cursor",
+    "while",
+    "tail"
+   ],
+   "description": "Design note: a lead blob rides the cursor while a tail blob chases it",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "blob",
+     "goo",
+     "hint",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-goo"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/41-gooey-cursor.html"
+  },
+  {
+   "name": "ghost-trail",
+   "category": "other",
+   "path": "snippets/other/ghost-trail",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "each",
+    "cursor",
+    "step",
+    "drops",
+    "square",
+    "past"
+   ],
+   "description": "Design note: each cursor step drops a square \"past state\" that fades and",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "hint",
+     "stage"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/42-ghost-trail.html"
+  },
+  {
+   "name": "connected-grid",
+   "category": "layout",
+   "path": "snippets/layout/connected-grid",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "layout",
+    "hovering",
+    "node",
+    "highlights",
+    "links",
+    "while",
+    "dashed"
+   ],
+   "description": "Design note: hovering a node highlights its links while dashed strokes",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "hint",
+     "kicker",
+     "net",
+     "node",
+     "node--a",
+     "node--b",
+     "node--c",
+     "node--d",
+     "node--e",
+     "node--f",
+     "nodes",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-net"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/43-connected-grid.html"
+  },
+  {
+   "name": "scroll-color-grade",
+   "category": "other",
+   "path": "snippets/other/scroll-color-grade",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "scene",
+    "grade",
+    "shifts",
+    "saturation",
+    "follow"
+   ],
+   "description": "Design note: the scene's grade shifts — hue and saturation follow the",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "grade",
+     "scene"
+    ],
+    "data_attributes": [
+     "data-grade"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/44-scroll-color-grade.html"
+  },
+  {
+   "name": "code-type-loop",
+   "category": "typography",
+   "path": "snippets/typography/code-type-loop",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "terminal",
+    "narrates",
+    "build",
+    "each",
+    "line",
+    "types"
+   ],
+   "description": "Design note: a terminal that narrates its own build — each line types out",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "bar",
+     "caret",
+     "hint",
+     "kicker",
+     "stage",
+     "term"
+    ],
+    "data_attributes": [
+     "data-term"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/45-code-type-loop.html"
+  },
+  {
+   "name": "grid-view-switch",
+   "category": "layout",
+   "path": "snippets/layout/grid-view-switch",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "layout",
+    "toggle",
+    "reorganises",
+    "cards",
+    "between",
+    "grid"
+   ],
+   "description": "Design note: one toggle reorganises six cards between a 3×2 grid and a",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "btn",
+     "card",
+     "card--a",
+     "card--b",
+     "card--c",
+     "card--d",
+     "card--e",
+     "card--f",
+     "head",
+     "kicker",
+     "stage",
+     "status",
+     "view"
+    ],
+    "data_attributes": [
+     "data-switch"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/46-grid-view-switch.html"
+  },
+  {
+   "name": "glitch-text",
+   "category": "typography",
+   "path": "snippets/typography/glitch-text",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "deliberate",
+    "fault",
+    "hover",
+    "introduces",
+    "chromatic",
+    "copies"
+   ],
+   "description": "Design note: a deliberate fault — hover introduces two chromatic copies",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "base",
+     "g",
+     "g--c",
+     "g--r",
+     "glitch",
+     "hint",
+     "kicker",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-glitch"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/47-glitch-text.html"
+  },
+  {
+   "name": "rounded-menu-expand",
+   "category": "nav",
+   "path": "snippets/nav/rounded-menu-expand",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "nav",
+    "menu",
+    "appears",
+    "single",
+    "disc",
+    "blooms"
+   ],
+   "description": "Design note: the menu appears as a single disc that blooms from the",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "burger",
+     "hint",
+     "idx",
+     "kicker",
+     "menu",
+     "stage",
+     "veil"
+    ],
+    "data_attributes": [
+     "data-menu"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/48-rounded-menu-expand.html"
+  },
+  {
+   "name": "text-repetition-drift",
+   "category": "typography",
+   "path": "snippets/typography/text-repetition-drift",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "stacked",
+    "repetitions",
+    "word",
+    "become",
+    "depth",
+    "field"
+   ],
+   "description": "Design note: six stacked repetitions of one word become a depth field —",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "cap",
+     "depth",
+     "stack",
+     "word"
+    ],
+    "data_attributes": [
+     "data-depth"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/49-text-repetition-drift.html"
+  },
+  {
+   "name": "lines-to-layout",
+   "category": "layout",
+   "path": "snippets/layout/lines-to-layout",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "layout",
+    "blueprint",
+    "draws",
+    "itself",
+    "hard",
+    "strokes",
+    "trace"
+   ],
+   "description": "Design note: the blueprint draws itself — hard strokes trace in sequence,",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "blueprint",
+     "bottom",
+     "dot",
+     "dot--hot",
+     "kicker",
+     "note",
+     "pen",
+     "pen--soft",
+     "sheet"
+    ],
+    "data_attributes": [
+     "data-bp"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/50-lines-to-layout.html"
+  },
+  {
+   "name": "circular-text",
+   "category": "typography",
+   "path": "snippets/typography/circular-text",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "typography",
+    "slow",
+    "seal",
+    "ring",
+    "type",
+    "rotates",
+    "continuously"
+   ],
+   "description": "Design note: a slow seal — the ring of type rotates continuously while",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "badge",
+     "core",
+     "hint",
+     "kicker",
+     "orbit",
+     "spintype",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-ring"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/51-circular-text.html"
+  },
+  {
+   "name": "double-slideshow",
+   "category": "media",
+   "path": "snippets/media/double-slideshow",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "media",
+    "decks",
+    "take",
+    "turns",
+    "foreground",
+    "over",
+    "while"
+   ],
+   "description": "Design note: two decks take turns — the foreground turns over in 3D while",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "controls",
+     "deck",
+     "kicker",
+     "mat",
+     "panel",
+     "panel--a",
+     "panel--b",
+     "panel--bg",
+     "panel--c",
+     "panel--d",
+     "panel--fg",
+     "stage"
+    ],
+    "data_attributes": [
+     "data-slide"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/52-double-slideshow.html"
+  },
+  {
+   "name": "gait-locomotion",
+   "category": "other",
+   "path": "snippets/other/gait-locomotion",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "atlas",
+    "other",
+    "four",
+    "limb",
+    "machine",
+    "whose",
+    "feet",
+    "phase"
+   ],
+   "description": "Design note: a four-limb machine whose feet are phase-locked to a ruled",
+   "tokens_used": [
+    "--space-64"
+   ],
+   "markup_requires": {
+    "classes": [
+     "accent",
+     "ground",
+     "hint",
+     "kicker",
+     "leg",
+     "leg__foot",
+     "leg__hip",
+     "leg__strut",
+     "mono",
+     "rover",
+     "rover__body",
+     "rover__dash",
+     "rover__kicker",
+     "rover__row",
+     "rover__stripe",
+     "rover__title",
+     "stage",
+     "strides",
+     "track"
+    ],
+    "data_attributes": [
+     "data-gait"
+    ],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/snippets/53-gait-locomotion.html"
+  },
+  {
+   "name": "magnetic-fracture",
+   "category": "other",
+   "path": "snippets/other/magnetic-fracture",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "pack-2",
+    "other"
+   ],
+   "description": "effect snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "field",
+     "hint",
+     "line",
+     "stage",
+     "title"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/motion-atlas-creative-53-60/motion-atlas/snippets/53-magnetic-fracture.html"
+  },
+  {
+   "name": "velocity-loom",
+   "category": "other",
+   "path": "snippets/other/velocity-loom",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "pack-2",
+    "other"
+   ],
+   "description": "effect snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "core",
+     "label",
+     "loom",
+     "readout",
+     "stage"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/motion-atlas-creative-53-60/motion-atlas/snippets/54-velocity-loom.html"
+  },
+  {
+   "name": "path-memory",
+   "category": "other",
+   "path": "snippets/other/path-memory",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "pack-2",
+    "other"
+   ],
+   "description": "effect snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "ghost",
+     "meta",
+     "orb",
+     "route",
+     "stage"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/motion-atlas-creative-53-60/motion-atlas/snippets/55-path-memory.html"
+  },
+  {
+   "name": "phase-collapse",
+   "category": "other",
+   "path": "snippets/other/phase-collapse",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "pack-2",
+    "other"
+   ],
+   "description": "effect snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "char",
+     "phase",
+     "stage",
+     "sub",
+     "word"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/motion-atlas-creative-53-60/motion-atlas/snippets/56-phase-collapse.html"
+  },
+  {
+   "name": "pressure-grid",
+   "category": "layout",
+   "path": "snippets/layout/pressure-grid",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "pack-2",
+    "layout"
+   ],
+   "description": "effect snippet in the layout category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "grid",
+     "label",
+     "meter",
+     "stage"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": "reassembly-grid",
+   "source": "motion-atlas/motion-atlas-creative-53-60/motion-atlas/snippets/57-pressure-grid.html"
+  },
+  {
+   "name": "tidal-panels",
+   "category": "layout",
+   "path": "snippets/layout/tidal-panels",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "pack-2",
+    "layout"
+   ],
+   "description": "effect snippet in the layout category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "meta",
+     "panel",
+     "pin",
+     "rail",
+     "stage"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js",
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/motion-atlas-creative-53-60/motion-atlas/snippets/58-tidal-panels.html"
+  },
+  {
+   "name": "collision-orbit",
+   "category": "other",
+   "path": "snippets/other/collision-orbit",
+   "status": "stable",
+   "tags": [
+    "effect",
+    "pack-2",
+    "other"
+   ],
+   "description": "effect snippet in the other category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "core",
+     "meta",
+     "orbit",
+     "stage"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": null,
+   "source": "motion-atlas/motion-atlas-creative-53-60/motion-atlas/snippets/59-collision-orbit.html"
+  },
+  {
+   "name": "reassembly-grid",
+   "category": "layout",
+   "path": "snippets/layout/reassembly-grid",
+   "status": "duplicate-candidate",
+   "tags": [
+    "effect",
+    "pack-2",
+    "layout"
+   ],
+   "description": "effect snippet in the layout category",
+   "tokens_used": [],
+   "markup_requires": {
+    "classes": [
+     "grid",
+     "meta",
+     "stage",
+     "status"
+    ],
+    "data_attributes": [],
+    "scripts": [
+     "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+    ]
+   },
+   "pairs_well_with": [],
+   "duplicate_of": "pressure-grid",
+   "source": "motion-atlas/motion-atlas-creative-53-60/motion-atlas/snippets/60-reassembly-grid.html"
+  }
+ ]
+}

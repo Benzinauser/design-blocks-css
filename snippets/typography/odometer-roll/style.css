@@ -1,0 +1,18 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .odo-wrap { min-height:100svh; display:flex; flex-direction:column; justify-content:center;gap:var(--space-48);padding:clamp(var(--space-20),4vw,var(--space-64)); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .odo { display:inline-flex; align-items:flex-end; gap:.4rem; }
+  .col {
+    height:1.1em; overflow:hidden; position:relative;
+    font-family:"Anton",sans-serif; font-weight:400;font-size:clamp(var(--font-size-),10vw,var(--space-144)); line-height:1;
+  }
+  .col .digits { display:flex; flex-direction:column; will-change:transform; }
+  .col .digit { height:1em; line-height:1; }
+  .sep { font-family:"Anton",sans-serif;font-size:clamp(var(--font-size-),10vw,var(--space-144)); color:var(--amber); }
+  .label { color:var(--bone-dim);margin-top:var(--space-16); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }

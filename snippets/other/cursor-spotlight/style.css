@@ -1,0 +1,24 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --sx:50%; --sy:50%; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage {
+    position:relative; height:100svh; overflow:hidden; cursor:crosshair;
+    display:grid; place-items:center;padding:clamp(var(--space-20),4vw,var(--space-64));
+  }
+  .title {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(2.6rem,9vw,var(--space-144)); line-height:1; text-align:center; max-width:14ch;
+  }
+  .title .dim { color:rgba(242,237,227,.16); }
+  /* the bright copy only shows inside the spotlight circle */
+  .title .bright {
+    position:absolute; inset:0; display:grid; place-items:center;
+    color:var(--bone);
+    clip-path:circle(130px at var(--sx) var(--sy));
+    -webkit-clip-path:circle(130px at var(--sx) var(--sy));
+  }
+  .hint { position:absolute;bottom:var(--space-24);left:clamp(var(--space-20),4vw,var(--space-64)); color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce) { .title .bright { clip-path:none; -webkit-clip-path:none; } }

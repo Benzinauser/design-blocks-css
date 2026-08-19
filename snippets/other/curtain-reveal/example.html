@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15 — Curtain reveal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage {
+    position:relative; height:100svh; overflow:hidden;
+    display:grid; place-items:center; padding:clamp(1.25rem,4vw,4rem);
+  }
+  .backdrop h1 {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.6rem,9vw,9rem); line-height:1; text-align:center;
+  }
+  .backdrop p { text-align:center; color:var(--bone-dim); margin-top:1.2rem; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  .curtain {
+    position:absolute; top:0; bottom:0; width:50%;
+    display:grid; place-items:center; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    color:rgba(16,17,19,.75); will-change:transform;
+  }
+  .curtain--l { left:0; background:linear-gradient(135deg,var(--vermillion),#ff8a3d); }
+  .curtain--r { right:0; background:linear-gradient(135deg,var(--teal),#7fe3d8); }
+
+  @media (prefers-reduced-motion: reduce) { .curtain { display:none; } }
+</style>
+</head>
+<body>
+<section class="stage" data-curtain="stage">
+  <div class="backdrop">
+    <h1>Behind the curtain</h1>
+    <p>15 · a scroll opens the stage</p>
+  </div>
+  <div class="curtain curtain--l" data-curtain="panel">direction</div>
+  <div class="curtain curtain--r" data-curtain="panel">motion</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  // Design note: two half-screen curtains part to opposite edges as you
+  // scroll, unveiling the headline — a theatrical wipe. Reduced motion: the
+  // curtains are removed by CSS and the stage simply shows its content.
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const [l, r] = gsap.utils.toArray('[data-curtain="panel"]');
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '[data-curtain="stage"]',
+        start: "top top",
+        end: "+=120%",
+        scrub: 0.6,
+        pin: true,
+        anticipatePin: 1
+      }
+    })
+      .fromTo(l, { xPercent: 0 }, { xPercent: -100, ease: "none" }, 0)
+      .fromTo(r, { xPercent: 0 }, { xPercent: 100, ease: "none" }, 0);
+  }
+</script>
+</body>
+</html>

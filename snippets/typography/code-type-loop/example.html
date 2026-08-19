@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>45 — Code type loop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --ink-2:#141619; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .term {
+    width:min(88vw,520px); background:var(--ink-2); border:1px solid rgba(242,237,227,.16);
+    border-radius:4px; overflow:hidden;
+  }
+  .term .bar {
+    display:flex; gap:.45rem; padding:.7rem 1rem; border-bottom:1px solid rgba(242,237,227,.1);
+  }
+  .term .bar i { width:9px; height:9px; border-radius:50%; display:block; }
+  .term .bar i:nth-child(1) { background:var(--vermillion); }
+  .term .bar i:nth-child(2) { background:var(--amber); }
+  .term .bar i:nth-child(3) { background:var(--teal); }
+  .term pre {
+    padding:1.2rem 1.2rem 1.4rem; margin:0; font-size:.72rem; line-height:1.75; min-height:11.5em; white-space:pre-wrap;
+  }
+  .caret { display:inline-block; width:.55em; height:1em; background:var(--teal); vertical-align:text-bottom; margin-left:1px; }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<section class="stage">
+  <p class="kicker"><b>45</b>Code type loop — the studio terminal writes itself</p>
+
+  <div class="term" aria-label="terminal">
+    <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+    <pre data-term="out"></pre>
+  </div>
+
+  <p class="hint">— lines type in with a blinking caret, block after block</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: a terminal that narrates its own build — each line types out
+  // character by character, then the block clears and the next file begins.
+  // Reduced motion: the finished block is printed at once.
+  const out = document.querySelector('[data-term="out"]');
+  const FILES = [
+    ["const studio = {", "  pace: 'power4',", "  restraint: true", "};"],
+    ["function direct(scene) {", "  gsap.to(scene, { yPercent: -20 });", "  return scene;", "}"],
+    ["export default flow;", "// one mechanism per idea", "// done."]
+  ];
+  const SPEED = 42; // ms per character
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    out.innerHTML = FILES[0].join("\n") + '<span class="caret" aria-hidden="true"></span>';
+  } else {
+    const caret = '<span class="caret" aria-hidden="true"></span>';
+    let fileIdx = 0;
+
+    const typeLine = (line, lineIdx) => new Promise((resolve) => {
+      const proxy = { n: 0 };
+      gsap.to(proxy, {
+        n: line.length,
+        duration: line.length * SPEED / 1000,
+        ease: "none",
+        onUpdate: () => {
+          out.innerHTML = FILES[fileIdx].slice(0, lineIdx + 1).map((l, i) => i < lineIdx ? l : l.slice(0, Math.round(proxy.n))).join("\n") + caret;
+        },
+        onComplete: resolve
+      });
+    });
+
+    const run = async () => {
+      for (let i = 0; i < FILES[fileIdx].length; i++) {
+        await typeLine(FILES[fileIdx][i], i);
+        await new Promise((r) => setTimeout(r, 260));
+      }
+      await new Promise((r) => setTimeout(r, 1300));
+      gsap.to(out, { opacity: 0, duration: 0.35, onComplete: () => { out.textContent = ""; gsap.set(out, { opacity: 1 }); fileIdx = (fileIdx + 1) % FILES.length; run(); } });
+    };
+    run();
+  }
+</script>
+</body>
+</html>

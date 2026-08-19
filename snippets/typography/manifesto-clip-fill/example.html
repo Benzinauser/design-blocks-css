@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04 — Scrubbed clip-fill text</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .manifesto { min-height:140svh; display:flex; flex-direction:column; justify-content:center; padding:clamp(3rem,10vh,8rem) clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.8rem; letter-spacing:.16em; text-transform:uppercase; margin-bottom:2.5rem; }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .statement {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.4rem,7.5vw,7.2rem); line-height:1.02;
+  }
+  /* ghost layer keeps the line readable before/without the fill */
+  .line { position:relative; display:block; }
+  .line .ghost { color:rgba(242,237,227,.22); }
+  .line .fill {
+    position:absolute; inset:0;
+    background:linear-gradient(90deg,var(--vermillion),var(--amber));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    background-repeat:no-repeat; background-size:0% 100%;
+  }
+  .line.accent .fill { background:linear-gradient(90deg,var(--teal),var(--bone)); }
+
+  .note { color:var(--bone-dim); margin-top:2.2rem; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .line .fill { background-size:100% 100%; }
+  }
+</style>
+</head>
+<body>
+<section class="manifesto">
+  <p class="kicker"><b>04</b>Manifesto</p>
+
+  <p class="statement" aria-label="Motion is the shortest distance between two ideas.">
+    <span class="line"><span class="ghost" aria-hidden="true">Motion is the</span><span class="fill" data-fill="line">Motion is the</span></span>
+    <span class="line"><span class="ghost" aria-hidden="true">shortest distance</span><span class="fill" data-fill="line">shortest distance</span></span>
+    <span class="line accent"><span class="ghost" aria-hidden="true">between two ideas.</span><span class="fill" data-fill="line">between two ideas.</span></span>
+  </p>
+
+  <p class="note" data-fill="note">— field note №4, on restraint</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+  // Design note: each line's gradient fill is scrubbed from 0% to 100% width
+  // against a ghost outline — the fill follows the reader, line by line.
+  // Reduced motion: CSS forces 100% fill; JS adds nothing.
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.utils.toArray('[data-fill="line"]').forEach((fill) => {
+      gsap.fromTo(fill,
+        { backgroundSize: "0% 100%" },
+        {
+          backgroundSize: "100% 100%",
+          ease: "none",
+          scrollTrigger: { trigger: fill, start: "top 88%", end: "top 32%", scrub: 0.5 }
+        });
+    });
+    gsap.fromTo('[data-fill="note"]',
+      { autoAlpha: 0, y: 12 },
+      {
+        autoAlpha: 1, y: 0, duration: 0.9, ease: "power2.out",
+        scrollTrigger: { trigger: '[data-fill="note"]', start: "top 92%" }
+      });
+  }
+</script>
+</body>
+</html>

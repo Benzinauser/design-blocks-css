@@ -1,0 +1,19 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center;gap:var(--space-48);padding:clamp(var(--space-20),4vw,var(--space-64)); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .balloon {
+    display:inline-flex; align-items:center; gap:1.4rem;
+    padding:1.2rem 2.6rem;background:linear-gradient(135deg,var(--vermillion),var(--color-orange));
+color:var(--color-ink-alpha-88); border:none;border-radius:var(--space-4); cursor:pointer;
+    font-family:"IBM Plex Mono",monospace; font-size:.8rem; letter-spacing:.16em; text-transform:uppercase;
+    will-change:transform,border-radius,box-shadow;
+  }
+  .balloon b { font-weight:400; }
+  .balloon .arrow { transition:transform .3s ease; }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>19 — Hover expand gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .gallery-wrap { min-height:100svh; display:flex; flex-direction:column; justify-content:center; gap:3rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .gallery { display:flex; gap:.6rem; height:clamp(320px,55vh,520px); }
+  .panel {
+    flex:1 1 0; min-width:0; overflow:hidden; cursor:pointer;
+    display:flex; flex-direction:column; justify-content:space-between; padding:1rem;
+    border-radius:2px; color:rgba(16,17,19,.85); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+    will-change:flex-grow;
+  }
+  .panel b { font-family:"Anton",sans-serif; font-weight:400; font-size:clamp(1.4rem,2.5vw,2.2rem); white-space:nowrap; }
+  .panel--a { background:linear-gradient(135deg,var(--vermillion),#ff8a3d); }
+  .panel--b { background:linear-gradient(135deg,var(--amber),#ffe39a); }
+  .panel--c { background:linear-gradient(135deg,var(--teal),#7fe3d8); }
+  .panel--d { background:linear-gradient(135deg,#8a6df1,#c4b4ff); }
+  .panel--e { background:linear-gradient(135deg,var(--bone),#b9b2a4); }
+
+  @media (max-width:760px) { .gallery { flex-direction:column; height:auto; } .panel { flex:1 1 auto; height:64px; } }
+</style>
+</head>
+<body>
+<section class="gallery-wrap">
+  <p class="kicker"><b>19</b>Hover expand gallery</p>
+  <div class="gallery" data-gallery="row">
+    <div class="panel panel--a" data-gallery="panel"><span>/01</span><b>Direction</b></div>
+    <div class="panel panel--b" data-gallery="panel"><span>/02</span><b>Choreography</b></div>
+    <div class="panel panel--c" data-gallery="panel"><span>/03</span><b>Interaction</b></div>
+    <div class="panel panel--d" data-gallery="panel"><span>/04</span><b>Systems</b></div>
+    <div class="panel panel--e" data-gallery="panel"><span>/05</span><b>Narrative</b></div>
+  </div>
+  <p class="kicker" style="color:var(--bone-dim)">— the hovered panel takes the space it needs; the rest step aside</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: hovering a panel grows its flex share while its neighbours
+  // yield — a polite tug-of-war, smooth power3, no bounce. Keyboard focus
+  // gets the same treatment.
+  const panels = gsap.utils.toArray('[data-gallery="panel"]');
+  const IN = 3.2, OUT = 1;
+
+  const setAll = (value) => {
+    panels.forEach((panel) => gsap.to(panel, { flexGrow: value, duration: 0.65, ease: "power3.inOut", overwrite: "auto" }));
+  };
+  const setHover = (target) => {
+    panels.forEach((panel) => gsap.to(panel, { flexGrow: panel === target ? IN : OUT, duration: 0.65, ease: "power3.inOut", overwrite: "auto" }));
+  };
+
+  panels.forEach((panel) => {
+    panel.addEventListener("mouseenter", () => setHover(panel));
+    panel.addEventListener("mouseleave", () => setAll(OUT));
+    panel.addEventListener("focus", () => setHover(panel));
+    panel.addEventListener("blur", () => setAll(OUT));
+    panel.tabIndex = 0;
+    panel.setAttribute("role", "button");
+  });
+</script>
+</body>
+</html>

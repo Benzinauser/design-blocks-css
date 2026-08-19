@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06 — SplitText char rise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .outro {
+    min-height:100svh; display:flex; flex-direction:column; justify-content:center; gap:3rem;
+    padding:clamp(3rem,10vh,8rem) clamp(1.25rem,4vw,4rem);
+  }
+  .line {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.2rem,7vw,6.5rem); line-height:1.04;
+  }
+  /* SplitText wraps each char; inline-block lets transforms apply per char */
+  .line .char { display:inline-block; will-change:transform; }
+  .meta { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; border-top:1px solid rgba(242,237,227,.16); padding-top:1.4rem; color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+  .meta b { color:var(--vermillion); font-weight:400; }
+</style>
+</head>
+<body>
+<footer class="outro">
+  <p class="line" data-outro="line">The end is where the motion starts.</p>
+  <div class="meta"><span>Motion Atlas® — a study in restraint</span><span><b>06</b> · SplitText chars</span></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://assets.codepen.io/16327/SplitText3.min.js"></script>
+<script>
+  // Design note: one line, split into characters that rise out of the fold
+  // with a slight rotation, staggered 0.035 — a closing beat, not a parade.
+  // Reduced motion: no split, no animation; the line is simply there.
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const line = document.querySelector('[data-outro="line"]');
+    const split = new SplitText(line, { type: "chars", charsClass: "char" });
+    gsap.from(split.chars, {
+      yPercent: 120,
+      rotate: 3,
+      duration: 1.05,
+      ease: "power4.out",
+      stagger: 0.035,
+      scrollTrigger: {
+        trigger: line,
+        start: "top 82%"
+      }
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14 — Tilt parallax</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; overflow:hidden; }
+
+  .scene {
+    height:100svh; display:grid; place-items:center; cursor:crosshair;
+    perspective:900px;
+  }
+  .scene-inner { position:relative; width:min(90vw,900px); aspect-ratio:16/9; transform-style:preserve-3d; will-change:transform; }
+  .layer { position:absolute; will-change:transform; }
+
+  .layer--text { inset:0; display:grid; place-items:center; }
+  .layer--text h1 { font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase; font-size:clamp(2.4rem,8vw,8rem); line-height:1; text-align:center; }
+  .layer--text h1 b { color:var(--vermillion); font-weight:400; }
+
+  .orb { border-radius:50%; filter:blur(2px); }
+  .orb--a { width:26%; aspect-ratio:1; background:radial-gradient(circle at 35% 35%, var(--vermillion), rgba(255,74,23,0) 70%); top:6%; left:4%; }
+  .orb--b { width:20%; aspect-ratio:1; background:radial-gradient(circle at 60% 40%, var(--teal), rgba(47,214,195,0) 70%); bottom:8%; right:6%; }
+  .ring { width:34%; aspect-ratio:1; border:2px solid rgba(242,237,227,.4); border-radius:50%; top:-14%; right:10%; }
+  .dot { width:2.2%; aspect-ratio:1; border-radius:50%; background:var(--amber); bottom:16%; left:18%; }
+  .tag { position:absolute; bottom:1.5rem; left:clamp(1.25rem,4vw,4rem); color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<section class="scene" data-tilt="scene">
+  <div class="scene-inner" data-tilt="inner">
+    <div class="layer layer--text" data-tilt="layer" data-depth="0.6"><h1>Depth is a <b>choice</b></h1></div>
+    <div class="layer orb orb--a" data-tilt="layer" data-depth="1.8"></div>
+    <div class="layer orb orb--b" data-tilt="layer" data-depth="1.4"></div>
+    <div class="layer ring" data-tilt="layer" data-depth="2.2"></div>
+    <div class="layer dot" data-tilt="layer" data-depth="2.6"></div>
+  </div>
+</section>
+<p class="tag mono">14 · tilt parallax — move the cursor</p>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: the whole stage tilts toward the cursor (quickTo) while each
+  // layer drifts at its own depth factor — a shallow 3D scene, no WebGL.
+  // Reduced motion: static composition.
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const scene = document.querySelector('[data-tilt="scene"]');
+    const inner = document.querySelector('[data-tilt="inner"]');
+    const layers = gsap.utils.toArray('[data-tilt="layer"]');
+
+    const rotX = gsap.quickTo(inner, "rotationX", { duration: 0.7, ease: "power3.out" });
+    const rotY = gsap.quickTo(inner, "rotationY", { duration: 0.7, ease: "power3.out" });
+
+    scene.addEventListener("mousemove", (e) => {
+      const r = scene.getBoundingClientRect();
+      const nx = (e.clientX - r.left) / r.width - 0.5;
+      const ny = (e.clientY - r.top) / r.height - 0.5;
+      rotY(nx * 12);
+      rotX(-ny * 12);
+      layers.forEach((layer) => {
+        const d = parseFloat(layer.dataset.depth) || 1;
+        gsap.to(layer, {
+          x: nx * 44 * d, y: ny * 44 * d,
+          duration: 0.9, ease: "power3.out", overwrite: "auto"
+        });
+      });
+    });
+
+    scene.addEventListener("mouseleave", () => {
+      rotX(0); rotY(0);
+      gsap.to(layers, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.6)", overwrite: "auto" });
+    });
+  }
+</script>
+</body>
+</html>

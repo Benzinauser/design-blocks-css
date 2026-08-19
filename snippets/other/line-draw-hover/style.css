@@ -1,0 +1,22 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center;gap:var(--space-48);padding:clamp(var(--space-20),4vw,var(--space-64)); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .words { display:flex; flex-wrap:wrap; gap:.4rem 1.6rem; justify-content:center;max-width:var(--space-896); }
+  .item { position:relative; cursor:default; }
+  .item span {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(2.2rem,7vw,var(--font-size-88px)); line-height:1.25; display:inline-block;
+  }
+  .item svg {
+    position:absolute; left:0; right:0; bottom:-0.12em; width:100%; height:.42em; overflow:visible;
+  }
+  .item svg line { stroke:var(--teal); stroke-width:3; stroke-linecap:round; }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce) { .item svg line { stroke-width:2; } }

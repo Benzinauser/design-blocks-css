@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13 — Reading highlight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"Space Grotesk",sans-serif; }
+
+  .read { min-height:100svh; display:flex; flex-direction:column; justify-content:center; gap:3rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .copy { font-size:clamp(1.4rem,3vw,2.4rem); line-height:1.45; max-width:52rem; }
+  .copy .word { display:inline-block; color:rgba(242,237,227,.18); }
+  .copy .word.is-read { color:var(--bone); }
+  .copy em { font-style:normal; color:var(--vermillion); }
+
+  .hint { font-family:"IBM Plex Mono",monospace; color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<section class="read">
+  <p class="kicker"><b>13</b>Reading highlight</p>
+  <p class="copy" data-read="copy">
+    Motion is a language with its own grammar — <em>timing</em> is the verb, <em>spacing</em> is the noun,
+    and <em>restraint</em> is the punctuation. We write in it the way editors write in type:
+    one word at a time, in the order the reader needs them.
+  </p>
+  <p class="hint">— the words light up as you pass them</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://assets.codepen.io/16327/SplitText3.min.js"></script>
+<script>
+  // Design note: each word turns from dim to full ink as the scroll passes —
+  // the reader "spends" the text at reading pace. Reduced motion: the whole
+  // passage is simply readable (no dim state applied).
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const copy = document.querySelector('[data-read="copy"]');
+    const split = new SplitText(copy, { type: "words", wordsClass: "word" });
+
+    gsap.fromTo(split.words,
+      { color: "rgba(242,237,227,0.18)" },
+      {
+        color: "#f2ede3",
+        ease: "none",
+        stagger: 1, // one unit of scrub time per word, in reading order
+        scrollTrigger: {
+          trigger: copy,
+          start: "top 70%",
+          end: "bottom 55%",
+          scrub: true
+        }
+      });
+  }
+</script>
+</body>
+</html>

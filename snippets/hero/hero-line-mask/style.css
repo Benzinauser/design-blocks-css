@@ -1,0 +1,29 @@
+
+  :root {
+    --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"Space Grotesk",sans-serif; overflow-x:clip; }
+  .mono { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  /* content must be readable without JS — .line-inner is only hidden by gsap.from() */
+  .hero {
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:flex-end;gap:var(--space-40);
+padding:clamp(var(--space-20),4vw,var(--space-64));
+  }
+  .kicker { display:flex; align-items:center;gap:var(--space-16); color:var(--bone-dim); }
+  .kicker span:first-child { color:var(--vermillion); }
+  .kicker span:last-child::before {
+    content:""; display:inline-block; width:3.2rem; height:1px;
+    background:var(--bone-faint); margin-right:.9rem; vertical-align:middle;
+  }
+  .title {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(var(--font-size-),10.5vw,var(--font-size-)); line-height:.94;
+  }
+  .line { display:block; overflow:hidden; padding-bottom:.06em; margin-bottom:-.06em; }
+  .line-inner { display:block; will-change:transform; }
+  .line-inner.accent { color:var(--vermillion); }
+.lede { max-width:var(--space-544); color:var(--bone-dim); border-top:1px solid var(--bone-faint); padding-top:1.6rem; }

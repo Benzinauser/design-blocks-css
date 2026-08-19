@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18 — Flip card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .deck { min-height:100svh; display:flex; flex-direction:column; justify-content:center; gap:3rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+  .card { perspective:900px; cursor:pointer; }
+  .card-inner { position:relative; aspect-ratio:3/4; transform-style:preserve-3d; will-change:transform; }
+  .face {
+    position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    display:flex; flex-direction:column; justify-content:space-between; padding:1.2rem;
+    border-radius:2px; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+  }
+  .face b { font-family:"Anton",sans-serif; font-weight:400; font-size:2rem; }
+  .front--a { background:linear-gradient(135deg,var(--vermillion),#ff8a3d); color:rgba(16,17,19,.85); }
+  .front--b { background:linear-gradient(135deg,var(--teal),#7fe3d8); color:rgba(16,17,19,.85); }
+  .front--c { background:linear-gradient(135deg,var(--amber),#ffe39a); color:rgba(16,17,19,.85); }
+  .back { background:var(--ink-2); border:1px solid rgba(242,237,227,.25); color:var(--bone-dim); transform:rotateY(180deg); }
+
+  @media (max-width:760px) { .grid { grid-template-columns:1fr; } }
+
+  /* reduced motion: swap faces by opacity, no 3D spin */
+  @media (prefers-reduced-motion: reduce) {
+    .face { transition:opacity .2s ease; }
+    .back { opacity:0; }
+    .card:hover .back, .card:focus-visible .back { opacity:1; }
+    .card:hover .front, .card:focus-visible .front { opacity:0; }
+  }
+</style>
+</head>
+<body>
+<section class="deck">
+  <p class="kicker"><b>18</b>Flip card</p>
+  <div class="grid">
+    <div class="card" data-flip="card" tabindex="0" role="button" aria-label="Direction card">
+      <div class="card-inner" data-flip="inner">
+        <div class="face front--a"><span>front / 01</span><b>Direction</b><span>hover to flip</span></div>
+        <div class="face back"><span>back / 01</span><b>What moves</b><p>We decide the first frame.</p></div>
+      </div>
+    </div>
+    <div class="card" data-flip="card" tabindex="0" role="button" aria-label="Choreography card">
+      <div class="card-inner" data-flip="inner">
+        <div class="face front--b"><span>front / 02</span><b>Choreography</b><span>hover to flip</span></div>
+        <div class="face back"><span>back / 02</span><b>How it moves</b><p>Sequence is a promise kept.</p></div>
+      </div>
+    </div>
+    <div class="card" data-flip="card" tabindex="0" role="button" aria-label="Systems card">
+      <div class="card-inner" data-flip="inner">
+        <div class="face front--c"><span>front / 03</span><b>Systems</b><span>hover to flip</span></div>
+        <div class="face back"><span>back / 03</span><b>Why it scales</b><p>One grammar, every surface.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: cards spin on rotationY to reveal a back face — hover for
+  // mouse, click for touch/keyboard. Reduced motion: CSS crossfades the
+  // faces instead of rotating in 3D.
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  gsap.utils.toArray('[data-flip="card"]').forEach((card) => {
+    const inner = card.querySelector('[data-flip="inner"]');
+    let flipped = false;
+
+    const flip = () => {
+      flipped = !flipped;
+      if (!reduced) {
+        gsap.to(inner, {
+          rotateY: flipped ? 180 : 0,
+          duration: 0.75,
+          ease: "power3.inOut",
+          overwrite: "auto"
+        });
+      } else {
+        card.classList.toggle("is-flipped"); // opacity swap handled by CSS
+      }
+    };
+
+    card.addEventListener("mouseenter", () => !flipped && flip());
+    card.addEventListener("mouseleave", () => flipped && flip());
+    card.addEventListener("click", flip);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); }
+    });
+  });
+</script>
+</body>
+</html>

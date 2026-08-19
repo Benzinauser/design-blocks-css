@@ -1,0 +1,16 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .depth { min-height:150svh; position:relative; }
+  .stack { position:sticky; top:0; height:100svh; overflow:hidden; display:flex; flex-direction:column; justify-content:center; }
+  .word {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(var(--font-size-),12vw,var(--font-size-)); line-height:1.15; text-align:center;
+    will-change:transform;
+  }
+  .word:nth-child(odd) { color:rgba(242,237,227,.16); }
+  .word:nth-child(even) { color:rgba(255,74,23,.5); }
+  .word:first-child, .word:last-child { color:var(--bone); }
+  .cap { position:absolute;bottom:var(--space-32); left:0; right:0; text-align:center; color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }

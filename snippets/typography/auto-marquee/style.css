@@ -1,0 +1,19 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --bone-faint:rgba(242,237,227,.16); --bone-faint-mid:rgba(242,237,227,.35); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; overflow-x:clip; }
+
+  .page { min-height:80svh; display:flex; align-items:center; justify-content:center; }
+  .page h2 { font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;font-size:clamp(var(--space-32),6vw,var(--space-80)); }
+  .page h2 b { color:var(--vermillion); font-weight:400; }
+
+  .marquee { border-top:1px solid rgba(242,237,227,.16); border-bottom:1px solid rgba(242,237,227,.16); padding:1.2rem 0; overflow:hidden; }
+  .marquee + .marquee { border-top:0; }
+  .marquee-row { display:flex; width:max-content; will-change:transform; }
+  .marquee-row span {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(var(--space-32),5vw,var(--font-size-)); line-height:1; white-space:nowrap;
+padding-right:var(--space-40); color:var(--bone-faint-mid);
+  }
+  .marquee:nth-child(2) .marquee-row span { color:var(--vermillion); }
+  .marquee:nth-child(3) .marquee-row span { color:var(--teal); }

@@ -1,0 +1,21 @@
+
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .scene { position:relative; height:180svh; }
+  .grade {
+    position:sticky; top:0; height:100svh; overflow:hidden;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;gap:var(--space-24);
+padding:clamp(var(--space-20),4vw,var(--space-64)); will-change:filter;
+  }
+  .grade::before {
+    content:""; position:absolute; inset:0;
+background:radial-gradient(120% 90% at 50% 12%, #2b4a63 0%, #101d2b 55%, var(--color-ink) 100%);
+  }
+  .grade h1 {
+    position:relative; font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+font-size:clamp(2.4rem,8vw,var(--space-112)); text-align:center; line-height:1;
+  }
+  .grade h1 b { color:var(--vermillion); font-weight:400; }
+  .grade p { position:relative; color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }

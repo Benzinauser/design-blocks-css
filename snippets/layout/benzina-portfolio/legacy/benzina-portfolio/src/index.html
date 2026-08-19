@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Benzina El houssine — creative developer & motion designer. A portfolio built with GSAP: interfaces, motion and Swiss-modernist poster design.">
+<title>Benzina El houssine — Creative Developer &amp; Motion Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- spring-trail cursor companion (motion-atlas: 28-spring-trail) -->
+<div class="cursor-trail" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <a class="nav__logo" href="#hero">BE<span class="nav__logo-dot">°</span></a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#statement">statement</a>
+    <a href="#work">work</a>
+    <a href="#capabilities">capabilities</a>
+    <a href="#services">services</a>
+    <a class="nav__cta" href="#contact">contact</a>
+  </nav>
+</header>
+
+<!-- ================= HERO — SWISSTED POSTER ================= -->
+<section id="hero" class="hero">
+  <div class="hero-poster" tabindex="0" role="img" aria-label="Animated poster for Benzina El houssine. Click to replay the animation.">
+    <div class="poster">
+      <!-- cream ground -->
+      <div class="poster__bg"></div>
+
+      <!-- line 1 : dark B (slides in from the right, under the red) -->
+      <div class="poster__b" aria-hidden="true">B</div>
+
+      <!-- line 1 : red stage, cream ENZINA cut through it (slides in from the left) -->
+      <div class="poster__stage poster__stage--red">
+        <span class="poster__enz" aria-hidden="true">ENZINA</span>
+      </div>
+
+      <!-- line 2 : blue stage, cream HOUSSINE cut through it -->
+      <div class="poster__stage poster__stage--blue">
+        <span class="poster__hou" aria-hidden="true">HOUSSINE</span>
+      </div>
+
+      <!-- line 2 : dark EL -->
+      <div class="poster__el" aria-hidden="true">EL</div>
+
+      <!-- cream square (dot) -->
+      <div class="poster__dot" aria-hidden="true"></div>
+
+      <!-- text content, swissted copy block -->
+      <div class="poster__content">
+        <h2 class="poster__band"><span>portfolio № 01 — 2025</span><span>benzina el houssine</span></h2>
+        <p class="poster__date"><span>creative developer &amp; motion designer</span><span>open for freelance &amp; collabs</span></p>
+      </div>
+
+      <p class="poster__location"><span>based in morocco</span><span>the atlantic · the atlas · the sahara</span></p>
+
+      <p class="poster__guests"><span>with special guests: react · gsap · three.js · typescript</span><span>[ click the poster to replay — scroll ↓ ]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track marquee__track--a">
+    <div class="marquee__inner">
+      <span>benzina el houssine</span><span>✦</span><span>creative developer</span><span>✦</span><span>motion designer</span><span>✦</span><span>based in morocco</span><span>✦</span>
+    </div>
+    <div class="marquee__inner" aria-hidden="true">
+      <span>benzina el houssine</span><span>✦</span><span>creative developer</span><span>✦</span><span>motion designer</span><span>✦</span><span>based in morocco</span><span>✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= STATEMENT — SCROLL + HOVER CLIP TEXT ================= -->
+<section id="statement" class="statement">
+  <p class="section__label">01 / statement</p>
+  <div class="statement__lines">
+    <h2 class="lines line--1">I BUILD<span>front-end experiences</span></h2>
+    <h2 class="lines line--2">INTERFACES<span>that move, breathe &amp; respond</span></h2>
+    <h2 class="lines line--3">WITH CODE<span>react · typescript · gsap</span></h2>
+    <h2 class="lines line--4">AND MOTION<span>scroll, hover &amp; stage choreography</span></h2>
+    <h2 class="lines line--5 lines--cta">LET'S CONNECT<a href="mailto:hello@benzina.dev"><span>hello@benzina.dev</span></a></h2>
+  </div>
+  <p class="statement__foot">serif-free, straight to the point — swiss modernist discipline with a saharan accent.</p>
+</section>
+
+<!-- ================= WORK — DRAGGABLE INFINITE SLIDER ================= -->
+<section id="work" class="work">
+  <header class="work__head">
+    <div>
+      <p class="section__label">02 / selected work</p>
+      <h2 class="work__title">Posters of<br>things I made.</h2>
+    </div>
+    <div class="work__controls">
+      <button class="work__arrow" data-slider="button-prev" aria-label="Previous project">←</button>
+      <div class="work__count">
+        <span data-slide-count="step">01</span>
+        <span data-slide-count="step">02</span>
+        <span data-slide-count="step">03</span>
+        <span data-slide-count="step">04</span>
+        <span data-slide-count="step">05</span>
+        <span data-slide-count="step">06</span>
+      </div>
+      <button class="work__arrow" data-slider="button-next" aria-label="Next project">→</button>
+      <span class="work__total">/<span data-slide-count="total">06</span></span>
+    </div>
+  </header>
+
+  <div class="work__viewport" data-slider="list">
+    <div class="work__track">
+
+      <article class="work-card" data-slider="slide">
+        <div class="work-card__poster" style="--card: var(--red)">
+          <span class="work-card__num">01</span>
+          <span class="work-card__mark">▲</span>
+          <h3 class="work-card__name">ATLAS</h3>
+          <p class="work-card__tag">food delivery platform</p>
+        </div>
+        <p class="work-card__meta">react · next.js · gsap — 2025</p>
+      </article>
+
+      <article class="work-card" data-slider="slide">
+        <div class="work-card__poster" style="--card: var(--blue)">
+          <span class="work-card__num">02</span>
+          <span class="work-card__mark">●</span>
+          <h3 class="work-card__name">DUNE</h3>
+          <p class="work-card__tag">desert tours e-commerce</p>
+        </div>
+        <p class="work-card__meta">shopify · three.js · 3d — 2024</p>
+      </article>
+
+      <article class="work-card" data-slider="slide">
+        <div class="work-card__poster" style="--card: var(--ink)">
+          <span class="work-card__num">03</span>
+          <span class="work-card__mark">■</span>
+          <h3 class="work-card__name">RIAD</h3>
+          <p class="work-card__tag">hotel booking experience</p>
+        </div>
+        <p class="work-card__meta">ui/ux · design system — 2024</p>
+      </article>
+
+      <article class="work-card" data-slider="slide">
+        <div class="work-card__poster" style="--card: var(--yellow)">
+          <span class="work-card__num">04</span>
+          <span class="work-card__mark">✦</span>
+          <h3 class="work-card__name">ZELLIJ</h3>
+          <p class="work-card__tag">pattern design tool</p>
+        </div>
+        <p class="work-card__meta">canvas · typescript — 2024</p>
+      </article>
+
+      <article class="work-card" data-slider="slide">
+        <div class="work-card__poster" style="--card: var(--pink)">
+          <span class="work-card__num">05</span>
+          <span class="work-card__mark">✕</span>
+          <h3 class="work-card__name">MADINA</h3>
+          <p class="work-card__tag">events &amp; ticketing pwa</p>
+        </div>
+        <p class="work-card__meta">pwa · motion design — 2023</p>
+      </article>
+
+      <article class="work-card" data-slider="slide">
+        <div class="work-card__poster" style="--card: var(--cream)">
+          <span class="work-card__num">06</span>
+          <span class="work-card__mark">◐</span>
+          <h3 class="work-card__name">SAHARA</h3>
+          <p class="work-card__tag">travel editorial site</p>
+        </div>
+        <p class="work-card__meta">editorial · scrollcraft — 2023</p>
+      </article>
+
+    </div>
+  </div>
+  <p class="work__hint">drag the track — or use the arrows</p>
+</section>
+
+<!-- ================= CAPABILITIES — SVG MASK WORD SLIDER ================= -->
+<section id="capabilities" class="caps">
+  <p class="section__label section__label--light">03 / capabilities</p>
+
+  <div id="cap-svg-wrap">
+    <div class="cap-slides">
+      <div class="cap-slide" count="0" data-1="I FOCUS ON" data-2="DEVELOPMENT" data-3="+ react · typescript · node.js · testing"></div>
+      <div class="cap-slide" count="1" data-1="I FOCUS ON" data-2="DESIGN" data-3="+ ui · design systems · brand · editorial"></div>
+      <div class="cap-slide" count="2" data-1="I FOCUS ON" data-2="MOTION" data-3="+ gsap · scrollcraft · webgl · prototyping"></div>
+    </div>
+
+    <svg id="cap-svg" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Rotating word: development, design, motion">
+      <mask id="cap-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="420">
+        <g id="cap-texts" font-family="Archivo, sans-serif" font-weight="900" fill="#FFFFFF">
+          <text class="cap-text1" text-anchor="middle" x="600" y="92" font-size="42" letter-spacing="6">I FOCUS ON</text>
+          <text class="cap-text2" text-anchor="middle" x="600" y="320" font-size="150" letter-spacing="1">DEVELOPMENT</text>
+        </g>
+      </mask>
+      <g id="cap-blobs" style="mask: url(#cap-mask);"></g>
+    </svg>
+
+    <div class="cap-meta">
+      <p class="cap-list">+ react · typescript · node.js · testing</p>
+      <p class="cap-hint">click to cycle — or let it spin</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES — ELASTIC ACCORDION ================= -->
+<section id="services" class="services">
+  <p class="section__label section__label--light">04 / services</p>
+  <div class="services__row">
+
+    <div class="svc" data-svc style="--svc: var(--red);">
+      <div class="svc__inner">
+        <span class="svc__num">01</span>
+        <h3 class="svc__name">DEVELOPMENT</h3>
+        <p class="svc__desc">Web apps, design systems and interfaces engineered to feel fast — react, typescript, node.</p>
+      </div>
+    </div>
+
+    <div class="svc" data-svc style="--svc: var(--blue);">
+      <div class="svc__inner">
+        <span class="svc__num">02</span>
+        <h3 class="svc__name">DESIGN</h3>
+        <p class="svc__desc">Visual identities, UI systems and editorial layouts with a swiss accent and a saharan palette.</p>
+      </div>
+    </div>
+
+    <div class="svc" data-svc style="--svc: var(--yellow);">
+      <div class="svc__inner">
+        <span class="svc__num">03</span>
+        <h3 class="svc__name">MOTION</h3>
+        <p class="svc__desc">Scroll choreography, micro-interactions and animated identity — gsap, scrolltrigger, webgl.</p>
+      </div>
+    </div>
+
+    <div class="svc" data-svc style="--svc: var(--pink);">
+      <div class="svc__inner">
+        <span class="svc__num">04</span>
+        <h3 class="svc__name">STRATEGY</h3>
+        <p class="svc__desc">Product thinking, information architecture and digital roadmaps that survive contact with users.</p>
+      </div>
+    </div>
+
+    <div class="svc" data-svc style="--svc: var(--ink);">
+      <div class="svc__inner">
+        <span class="svc__num">05</span>
+        <h3 class="svc__name">BRANDING</h3>
+        <p class="svc__desc">Names, marks and animated identities for teams that want to be remembered on the first frame.</p>
+      </div>
+    </div>
+
+  </div>
+  <p class="services__hint">click a poster to expand — elastic physics included</p>
+</section>
+
+<!-- ================= OUTRO / CONTACT ================= -->
+<section id="contact" class="outro">
+  <p class="section__label">05 / contact</p>
+  <h2 class="outro__head">
+    <span class="outro__line">LET'S BUILD</span>
+    <span class="outro__line">SOMETHING THAT</span>
+    <span class="outro__line outro__line--accent">MOVES<span class="outro__cursor">.</span></span>
+  </h2>
+  <a class="outro__mail" href="mailto:hello@benzina.dev">hello@benzina.dev</a>
+  <p class="outro__note">currently open for freelance &amp; collaborations — worldwide, remotely, from morocco.</p>
+</section>
+
+<footer class="footer">
+  <p class="footer__left">© 2025 benzina el houssine — made in morocco</p>
+  <p class="footer__mid">powered by gsap &amp; too much coffee</p>
+  <div class="footer__right">
+    <a href="#" aria-label="GitHub (placeholder)">github</a>
+    <a href="#" aria-label="LinkedIn (placeholder)">linkedin</a>
+    <a href="#" aria-label="Dribbble (placeholder)">dribbble</a>
+  </div>
+</footer>
+
+<div class="footer__watermark" aria-hidden="true">BENZINA</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+<script src="./script.js"></script>
+</body>
+</html>

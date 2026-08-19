@@ -1,0 +1,61 @@
+
+  :root {
+    --ink:#101113; --ink-2:#17191c; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55);
+    --bone-faint:rgba(242,237,227,.16); --vermillion:#ff4a17; --amber:#ffc43d; --teal:#2fd6c3;
+    /* one stride of the machine — the track is ruled in exactly this unit */
+    --stride:clamp(30px, 5.5vw, 46px);
+    --leg:clamp(104px, 16svh, 150px);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"Space Grotesk",sans-serif; overflow:hidden; }
+  .mono { font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  .stage { height:100svh; display:flex; flex-direction:column;padding:clamp(var(--space-20),3vw,var(--space-40)) clamp(var(--space-20),4vw,var(--space-64)) clamp(var(--space-16),3vw,var(--space-32));gap:clamp(.7,2vh,var(--space-20)); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); font-family:"IBM Plex Mono",monospace; }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .track { position:relative; flex:1; min-height:0; cursor:crosshair; touch-action:none; user-select:none; }
+  .track::after { content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, transparent 0%, transparent 71%, rgba(242,237,227,.05) 71%, rgba(242,237,227,.05) 100%); }
+
+  /* the measured track: a ground line plus a ruler in whole strides.
+     the accent mark lands every fifth stride, so slip is visible across
+     any distance larger than one step. */
+  .ground { position:absolute; left:0; right:0; top:72%; height:1px;background:var(--color-bone-alpha-30); }
+  .strides { position:absolute; left:0; right:0; top:72%; height:14px; overflow:hidden;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,74,23,.42) 0 1px, transparent 1px calc(var(--stride) * 5)),
+      repeating-linear-gradient(90deg, rgba(242,237,227,.3) 0 1px, transparent 1px var(--stride)); }
+
+  /* the machine */
+  .rover { position:absolute; inset:0; pointer-events:none; }
+  .rover__body {
+    position:absolute; left:50%; top:0; z-index:2;width:clamp(var(--space-240), 32vw, var(--space-320));height:clamp(var(--space-64), 11svh, var(--space-88));
+    background:var(--ink-2); border:1px solid var(--bone-faint);border-radius:var(--radius-3px);
+    padding:.6rem .85rem; display:flex; flex-direction:column; justify-content:space-between;
+    transform-origin:50% 100%;
+  }
+  .rover__kicker { color:var(--vermillion); font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; font-family:"IBM Plex Mono",monospace; }
+  .rover__title { font-family:"Anton",sans-serif; font-weight:400; font-size:clamp(1.2rem,4vw,1.9rem); line-height:.95; text-transform:uppercase; color:var(--bone); }
+  .rover__row { display:flex; align-items:baseline; justify-content:space-between;gap:var(--space-16); }
+  .rover__dash { color:var(--bone-dim); font-size:.62rem; }
+  .rover__stripe { display:block; position:absolute; left:0; right:0; bottom:-1px; height:3px;
+    background:repeating-linear-gradient(90deg, var(--vermillion) 0 10px, transparent 10px 18px); }
+
+  /* mechanical limbs: each strut passes exactly through its foot, so a
+     planted foot is a hard ground contact, never a hover */
+  .leg { position:absolute; left:0; top:0; }
+  .leg__strut { position:absolute; left:0; top:0; width:7px; height:var(--leg);border-radius:var(--radius-2px);
+    background:linear-gradient(180deg, var(--vermillion), #f0631f 60%, #c93a0c); transform-origin:50% 0%; }
+  .leg__hip { position:absolute;left:var(--space--4);top:var(--space--4); width:15px; height:15px;border-radius:var(--radius-round);
+    background:var(--amber); box-shadow:0 0 0 3px rgba(255,196,61,.14); }
+  .leg__foot { position:absolute;width:var(--space-28);height:var(--space-8);border-radius:var(--radius-2px);
+    background:var(--bone); }
+
+  .hint { font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); font-family:"IBM Plex Mono",monospace; display:flex; flex-wrap:wrap;gap:. var(--space-24); }
+  .hint b { color:var(--bone); font-weight:400; }
+  .hint .accent { color:var(--teal); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track { cursor:default; }
+  }

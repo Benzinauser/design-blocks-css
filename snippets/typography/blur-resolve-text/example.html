@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 — Blur resolution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .hero { min-height:100svh; display:flex; flex-direction:column; justify-content:center; gap:2rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+  .title {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.6rem,9vw,9rem); line-height:1;
+  }
+  .title .char { display:inline-block; will-change:transform,filter; }
+  .lede { max-width:30rem; color:var(--bone-dim); }
+</style>
+</head>
+<body>
+<section class="hero">
+  <p class="kicker"><b>07</b>Blur resolution</p>
+  <h1 class="title" data-blur="title">Focus is a decision.</h1>
+  <p class="lede">Each character starts out of focus and resolves as it enters the frame — a soft arrival, nothing mechanical.</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://assets.codepen.io/16327/SplitText3.min.js"></script>
+<script>
+  // Design note: characters resolve from blur + lift into sharp focus,
+  // staggered — a soft, optical entrance. Reduced motion: no split, no blur.
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const title = document.querySelector('[data-blur="title"]');
+    const split = new SplitText(title, { type: "chars", charsClass: "char" });
+    gsap.from(split.chars, {
+      filter: "blur(14px)",
+      opacity: 0,
+      yPercent: 30,
+      duration: 1.1,
+      ease: "power3.out",
+      stagger: 0.045,
+      scrollTrigger: { trigger: title, start: "top 75%" }
+    });
+  }
+</script>
+</body>
+</html>

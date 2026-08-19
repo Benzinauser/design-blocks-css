@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>37 — Line-draw hover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --teal:#2fd6c3; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage { height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3rem; padding:clamp(1.25rem,4vw,4rem); }
+  .kicker { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--bone-dim); }
+  .kicker b { color:var(--vermillion); font-weight:400; margin-right:.8rem; }
+
+  .words { display:flex; flex-wrap:wrap; gap:.4rem 1.6rem; justify-content:center; max-width:56rem; }
+  .item { position:relative; cursor:default; }
+  .item span {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.2rem,7vw,5.5rem); line-height:1.25; display:inline-block;
+  }
+  .item svg {
+    position:absolute; left:0; right:0; bottom:-0.12em; width:100%; height:.42em; overflow:visible;
+  }
+  .item svg line { stroke:var(--teal); stroke-width:3; stroke-linecap:round; }
+  .hint { color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce) { .item svg line { stroke-width:2; } }
+</style>
+</head>
+<body>
+<section class="stage">
+  <p class="kicker"><b>37</b>Line-draw hover</p>
+  <div class="words" data-line="words">
+    <div class="item" data-line="item"><span>Direction</span><svg viewBox="0 0 100 10" preserveAspectRatio="none"><line x1="0" y1="5" x2="100" y2="5" data-line="rule"/></svg></div>
+    <div class="item" data-line="item"><span>Choreography</span><svg viewBox="0 0 100 10" preserveAspectRatio="none"><line x1="0" y1="5" x2="100" y2="5" data-line="rule"/></svg></div>
+    <div class="item" data-line="item"><span>Easing</span><svg viewBox="0 0 100 10" preserveAspectRatio="none"><line x1="0" y1="5" x2="100" y2="5" data-line="rule"/></svg></div>
+    <div class="item" data-line="item"><span>Systems</span><svg viewBox="0 0 100 10" preserveAspectRatio="none"><line x1="0" y1="5" x2="100" y2="5" data-line="rule"/></svg></div>
+  </div>
+  <p class="hint">— underlines draw themselves in, then retreat the same way</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: each word's rule is an SVG stroke that draws from the left
+  // on hover and un-draws on leave — nothing else moves, one mechanism.
+  // Reduced motion: the line appears instantly via stroke-dashoffset CSS.
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const items = gsap.utils.toArray('[data-line="item"]');
+
+  items.forEach((item) => {
+    const rule = item.querySelector('[data-line="rule"]');
+    const LEN = rule.getTotalLength();
+    gsap.set(rule, { strokeDasharray: LEN, strokeDashoffset: LEN });
+
+    const draw = (on) => {
+      if (reduced) {
+        gsap.set(rule, { strokeDashoffset: on ? 0 : LEN });
+        return;
+      }
+      gsap.to(rule, {
+        strokeDashoffset: on ? 0 : LEN,
+        duration: on ? 0.5 : 0.45,
+        ease: on ? "power3.inOut" : "power2.out",
+        overwrite: "auto"
+      });
+    };
+    item.addEventListener("mouseenter", () => draw(true));
+    item.addEventListener("mouseleave", () => draw(false));
+  });
+</script>
+</body>
+</html>

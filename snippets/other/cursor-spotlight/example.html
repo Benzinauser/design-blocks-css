@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>23 — Cursor spotlight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#101113; --bone:#f2ede3; --bone-dim:rgba(242,237,227,.55); --vermillion:#ff4a17; --sx:50%; --sy:50%; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--ink); color:var(--bone); font-family:"IBM Plex Mono",monospace; }
+
+  .stage {
+    position:relative; height:100svh; overflow:hidden; cursor:crosshair;
+    display:grid; place-items:center; padding:clamp(1.25rem,4vw,4rem);
+  }
+  .title {
+    font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase;
+    font-size:clamp(2.6rem,9vw,9rem); line-height:1; text-align:center; max-width:14ch;
+  }
+  .title .dim { color:rgba(242,237,227,.16); }
+  /* the bright copy only shows inside the spotlight circle */
+  .title .bright {
+    position:absolute; inset:0; display:grid; place-items:center;
+    color:var(--bone);
+    clip-path:circle(130px at var(--sx) var(--sy));
+    -webkit-clip-path:circle(130px at var(--sx) var(--sy));
+  }
+  .hint { position:absolute; bottom:1.5rem; left:clamp(1.25rem,4vw,4rem); color:var(--bone-dim); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce) { .title .bright { clip-path:none; -webkit-clip-path:none; } }
+</style>
+</head>
+<body>
+<section class="stage" data-spot="stage">
+  <div class="title">
+    <span class="dim" aria-hidden="true">Look closer</span>
+    <span class="bright" aria-hidden="true">Look closer</span>
+  </div>
+  <p class="hint">23 · cursor spotlight — move around</p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script>
+  // Design note: a bright copy of the headline is clipped to a circle that
+  // follows the cursor — the page hides until you look at it. Reduced motion:
+  // the bright copy is always visible (CSS removes the clip).
+  const stage = document.querySelector('[data-spot="stage"]');
+  const bright = stage.querySelector(".bright");
+
+  stage.addEventListener("mousemove", (e) => {
+    const r = stage.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    bright.style.setProperty("--sx", x + "%");
+    bright.style.setProperty("--sy", y + "%");
+  });
+</script>
+</body>
+</html>
